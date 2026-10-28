@@ -1,0 +1,36 @@
+.Logo img{
+   position: absolute;
+}
+.Logo p{
+    position: relative;
+    padding-top: 7px;
+    font-size: 16px;
+    font-weight: 800;
+    font-style: bold;
+    padding-left: 25px;
+}
+.Logo{
+    margin-top: 20px;
+    margin-left: 14px;
+}
+header{
+    height: 56px;
+}
+.container{
+    width: 1280px;
+    height: 850px;
+}
+h1{
+    font-weight: 900;
+    font-size: 102px;
+}
+.smart{
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 125px;
+}
+.welcomeTXT{
+    position: absolute;
+    margin-left: 150px;
+    margin-top: 200px;
+}
