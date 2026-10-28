@@ -1,0 +1,87 @@
+.Form{
+    margin-top: 75px;
+    margin-left: 750px;
+    width: 436px;
+    height: 535px;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+        font-size: 12px;
+-webkit-box-shadow: -1px 5px 15px -7px #000000; 
+box-shadow: -1px 5px 15px -7px #000000;
+display: flex;
+flex-direction: column;
+}
+.GoogleSection{
+    align-self: center;
+    margin-top: 10px;
+}
+.label{
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 30px;
+}
+
+.text{
+    color: #52555F;
+    font-weight: 400;
+    text-align: left;
+    width: 265px;
+    margin: 0 auto;  
+    margin-top: 30px;
+    margin-bottom: 5px; 
+}
+.Inputs{
+    margin: 0 auto;
+}
+.Field{
+    margin-top: 5px;
+  width: 245px;
+  height: 52px;
+  border-radius: 30px;
+  padding-left: 20px;
+  border: none;
+  background-color: #F6F7FB;
+}
+.buttonsSection{
+    display: flex;
+    gap: 25px;
+    margin-top: 30px;
+    margin-left: 76px;
+}
+.button1 {
+    font-size: 12px;
+    width: 125px;
+    height: 44px;
+    border-radius: 16px;
+    background-color: #FF751D;
+    color: white;
+    font-weight: 700;
+    border:none;
+     box-shadow: 0px 4px 6px #FF6B0859;
+}
+.button2 {
+    font-size: 12px;
+    width: 125px;
+    height: 44px;
+    border-radius: 16px;
+    background-color: #F6F7FB;
+    color: #52555F;
+    font-weight: 700;
+    border:none;
+     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+.Gbutton{
+    margin-top: 10px;
+    margin-left: 65px;
+    font-size: 12px;
+    width: 122px;
+    height: 40px;
+    border-radius: 26px;
+    background-color: #F6F7FB;
+    font-weight: 700;
+    border:none;
+     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
