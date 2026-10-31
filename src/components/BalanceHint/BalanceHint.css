@@ -1,0 +1,13 @@
+.balance-hint {
+  position: absolute;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-30%);
+  width: 180px;
+  padding: 16px;
+  color: #fff;
+  background: #0b1a3d;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 10;
+}
