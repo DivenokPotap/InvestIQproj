@@ -6,31 +6,86 @@
     padding-top: 7px;
     font-size: 16px;
     font-weight: 800;
-    font-style: bold;
+    font-weight: bold;
     padding-left: 25px;
 }
 .Logo{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 14px;
 }
 header{
     height: 56px;
 }
 .container{
-    width: 1280px;
+    width: 100%;
+    max-width: 1280px;
     height: 850px;
 }
-h1{
+.Invest{
     font-weight: 900;
     font-size: 102px;
 }
 .smart{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     margin-left: 125px;
 }
 .welcomeTXT{
+    margin-top: 150px;
+    line-height: 5px;
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    margin-left: 150px;
-    margin-top: 200px;
+    margin-left: 200px;
+}
+.grey_bg{
+    top: 56px;
+    background-color: var(--color-grey);
+    width: 100vw;
+    height: 553px;
+    position: absolute;
+    z-index: -1;              
+    pointer-events: none;
+    border-bottom-left-radius: 150px;
+}
+
+.bgImage{
+   position: absolute;
+   z-index: 0; 
+   top: 60px;
+   left: 5px;
+   width: 100vw;   
+}
+
+.Rec65{
+    position: absolute;
+    margin-top: 10px;
+}
+.Rec66{
+    margin-left: 90px;
+}
+.Recs{
+    margin-top: 160px;
+    margin-left: 65px;
+    display: flex;
+}
+.Shadows{
+    margin-top: 20px;
+    display: flex;
+}
+.Shadow65{
+    margin-top: 30px;
+    margin-left: 60px;
+    background-color: var(--color-grey);
+    width: 91px;
+    height: 18px;
+    border-radius: 50%;   
+}
+.Shadow66{
+    margin-top: 10px;
+    margin-left: 30px;
+    background-color: var(--color-grey);
+    width: 91px;
+    height: 18px;
+    border-radius: 50%;   
 }

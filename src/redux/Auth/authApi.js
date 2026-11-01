@@ -1,63 +1,132 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ApiClient, getToken } from "@/services/api";
+import { auth, provider } from "@/firebase/firebase";
+import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+
+const serializeUser = user => ({
+  uid: user.uid,
+  email: user.email,
+  displayName: user.displayName,
+  photoURL: user.photoURL,
+  emailVerified: user.emailVerified,
+  providerData: user.providerData.map(provider => ({
+    providerId: provider.providerId,
+    uid: provider.uid,
+    displayName: provider.displayName,
+    email: provider.email,
+    photoURL: provider.photoURL,
+  })),
+});
+
+const serializeError = error => ({
+  status: "CUSTOM_ERROR",
+  error: error.message || "Unknown error",
+});
 
 export const authApi = createApi({
-    reducerPath: "authApi",
-    baseQuery: fetchBaseQuery({
+  reducerPath: "authApi",
+  baseQuery: fakeBaseQuery(),
+  endpoints: builder => ({
+    signUp: builder.mutation({
+      async queryFn({ name, email, password }) {
+        try {
+          const result = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password,
+          );
+          await updateProfile(result.user, {
+            displayName: name,
+          });
 
-        baseUrl: ApiClient.defaults.baseURL,
+          return { data: serializeUser(result.user) };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+    }),
+    signIn: builder.mutation({
+      async queryFn({ email, password }) {
+        try {
+          const result = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password,
+          );
+          return { data: serializeUser(result.user) };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+    }),
+    signOut: builder.mutation({
+      async queryFn() {
+        try {
+          await signOut(auth);
+          return { data: true };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+    }),
+    signInWithGoogle: builder.mutation({
+      async queryFn() {
+        try {
+          const result = await signInWithPopup(auth, provider);
+          return { data: serializeUser(result.user) };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+    }),
+    getCurrent: builder.query({
+      async queryFn() {
+        try {
+          const user = await new Promise((resolve, reject) => {
+            const unsubscribe = onAuthStateChanged(
+              auth,
+              user => {
+                unsubscribe(), resolve(user);
+              },
+              error => {
+                unsubscribe();
+                reject(error);
+              },
+            );
+          });
+
+          return {
+            data: user ? serializeUser(user) : null,
+          };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+    }),
+    onAuthChange: builder.query({
+        queryFn: () => ({ data: null }), 
         
-        prepareHeaders: (headers) => {
-            const token = getToken()
-            
-            if (token) {
-                headers.set("Authorization",`Bearer ${token}`)
-            }
-            return headers
+        async onCacheEntryAdded(
+            _, {updateCachedData, cacheEntryRemoved}
+        ) {
+            const unsubscribe = onAuthStateChanged(
+                auth, user => (
+                    updateCachedData(() => (
+                        user ? serializeUser(user) : null
+                    ))
+            ))
+                   await cacheEntryRemoved;
+                   unsubscribe();
         }
     }),
-    tagTypes: ["Auth"],
-    endpoints: (builder) => ({
-        signIn: builder.mutation({
-            query(userData) {
-                return {
-                    url: "/users/login",
-                    method: 'POST',
-                    body: userData,
-                }
-            },
-            invalidatesTags: ["Auth"]
-        }),
-         signUp: builder.mutation({
-            query(userData) {
-                return {
-                    url: "/users/signup",
-                    method: 'POST',
-                    body: userData,
-                }
-            },
-            invalidatesTags: ["Auth"]
-         }),
-          signOut: builder.mutation({
-            query() {
-                return {
-                    url: "/users/logout",
-                    method: 'POST',
-                }
-            },
-            invalidatesTags: ["Auth"]
-          }),
-           getCurrent: builder.query({
-            query: () => "users/current",
-            providesTags: ["Auth"]
-        }),
-    })
-})
+  }),
+});
 
 export const {
   useSignUpMutation,
   useSignInMutation,
+  useSignInWithGoogleMutation,
   useSignOutMutation,
   useGetCurrentQuery,
+  useOnAuthChangeQuery,
   useLazyGetCurrentQuery,
 } = authApi;
