@@ -2,6 +2,7 @@ import { useState } from "react";
 import BalanceHint from "../BalanceHint/BalanceHint";
 import Transactions from "../Transactions/Transactions";
 import css from "./Tracker.module.css";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 const CATEGORIES = {
   expense: [
@@ -20,6 +21,7 @@ export default function Tracker() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
+  const [deleteId, setDeleteId] = useState(null);
 
   const today = new Date().toLocaleDateString("uk-UA");
 
@@ -52,15 +54,20 @@ export default function Tracker() {
     clearForm();
   };
 
-  const deleteTransaction = id => {
-    const item = transactions.find(tx => tx.id === id);
-    if (!item) return;
+ const askDelete = id => setDeleteId(id);
 
-    setTransactions(prev => prev.filter(tx => tx.id !== id));
+const confirmDelete = () => {
+  const item = transactions.find(tx => tx.id === deleteId);
+  if (item) {
+    setTransactions(prev => prev.filter(tx => tx.id !== deleteId));
     setBalance(prev =>
       item.type === "expense" ? prev + item.amount : prev - item.amount,
     );
-  };
+  }
+  setDeleteId(null);
+};
+
+const cancelDelete = () => setDeleteId(null);
 
   return (
     <div className={css.page}>
@@ -131,12 +138,14 @@ export default function Tracker() {
             ОЧИСТИТИ
           </button>
         </div>
-
-        <Transactions
-          transactions={transactions}
-          type={type}
-          onDelete={deleteTransaction}
-        />
+<Transactions
+  transactions={transactions}
+  type={type}
+  onDelete={askDelete}
+/>
+{deleteId && (
+  <ConfirmModal onConfirm={confirmDelete} onCancel={cancelDelete} />
+)}
       </div>
     </div>
   );
