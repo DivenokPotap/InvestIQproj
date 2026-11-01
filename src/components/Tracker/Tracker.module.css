@@ -1,0 +1,150 @@
+.page {
+  min-height: 100vh;
+  padding: 30px 40px 60px;
+  background: #fafbfd;
+  font-family: "Roboto", Arial, sans-serif;
+  color: #52555f;
+}
+
+.header {
+  position: relative; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.label {
+  font-size: 16px;
+}
+
+.balanceInput {
+  width: 130px;
+  height: 56px;
+  padding: 0 14px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  border: 2px solid #fff;
+  border-radius: 28px;
+  background: #fff;
+}
+
+.confirmBtn {
+  height: 56px;
+  padding: 0 28px;
+  font-size: 14px;
+  color: #c7ccdc;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 28px;
+  cursor: pointer;
+}
+
+.card {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 50px 30px 40px;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 10px 40px rgba(170, 178, 197, 0.2);
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: -50px 0 30px -30px;
+}
+
+.tab,
+.tabActive {
+  padding: 18px 42px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 28px 28px 0 0;
+  background: #f5f6fb;
+  color: #52555f;
+  cursor: pointer;
+}
+
+.tabActive {
+  color: #ff751d;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.date {
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.fields {
+  display: flex;
+  flex: 1;
+  border: 2px solid #f5f6fb;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.input,
+.select,
+.sum {
+  height: 56px;
+  padding: 0 22px;
+  font-size: 15px;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.input {
+  flex: 3;
+  min-width: 0;
+}
+
+.select {
+  flex: 2;
+  border-left: 2px solid #f5f6fb;
+  color: #7a7d8c;
+}
+
+.sum {
+  width: 130px;
+  text-align: center;
+  border-left: 2px solid #f5f6fb;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  height: 56px;
+  padding: 0 40px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 28px;
+  cursor: pointer;
+}
+
+.primaryBtn {
+  color: #fff;
+  background: #ff751d;
+  border: none;
+}
+
+.primaryBtn:hover {
+  background: #e65f08;
+}
+
+.secondaryBtn {
+  color: #52555f;
+  background: #fff;
+  border: 2px solid #f5f6fb;
+}
