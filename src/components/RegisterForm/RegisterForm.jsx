@@ -5,6 +5,8 @@ import { useSignUpMutation } from "@/redux/Auth/authApi";
 import { useDispatch } from "react-redux";
 import { setAuth } from "@/redux/Auth/authSlice";
 import css from "./RegisterForm.module.css"
+import base from "@/components/baseStyles/baseStyles.module.css"
+import clsx from "clsx";
 
 const validationSchema = Yup.object({
   name: Yup.string().min(2, "Замало").max(70, "Задовго").required('Це обовʼязкове поле'),
@@ -38,25 +40,25 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <Form className={css.Form}>
-                <div className={css.Inputs}>
-                <label className={css.label} htmlFor="name">Ім'я:
-                <Field className={css.Field} name="name" type="text" />
-                <ErrorMessage className={css.Error} name="name" component="div"/>
+                <Form className={base.baseForm}>
+                <div className={base.BaseInputs}>
+                <label className={clsx(base.Baselabel, css.label)} htmlFor="name">Ім'я:
+                <Field className={base.BaseField} name="name" type="text" />
+                <ErrorMessage className={base.BaseError} name="name" component="div"/>
                 </label>
-                <label className={css.label} htmlFor="email">Електронна пошта:
-                <Field className={css.Field} name="email" type="text" />
-                <ErrorMessage className={css.Error} name="email" component="div"/>
+                <label className={clsx(base.Baselabel, css.label)} htmlFor="email">Електронна пошта:
+                <Field className={base.BaseField} name="email" type="text" />
+                <ErrorMessage className={base.BaseError} name="email" component="div"/>
                 </label>
                 
-                <label className={css.label} htmlFor="password"> Пароль:
-                <Field className={css.Field} name="password" type="text" />
-                <ErrorMessage className={css.Error} name="password" component="div" />
+                <label className={clsx(base.Baselabel, css.label)} htmlFor="password"> Пароль:
+                 <Field className={base.BaseField} name="password" type="password" />
+                 <ErrorMessage className={base.BaseError} name="password" component="div" />
                 </label>
                 </div>
-                <div className={css.buttonsSection}>
-                <button className={css.button2} onClick={onSwitchToLogin} type="button">УВІЙТИ</button>
-                <button className={css.button1} type="submit">РЕЄСТРАЦІЯ</button>
+                <div className={clsx(base.BasebuttonsSection, css.buttonSection)}>
+                <button className={base.Basebutton2} onClick={onSwitchToLogin} type="button">УВІЙТИ</button>
+                <button className={base.Basebutton1} type="submit">РЕЄСТРАЦІЯ</button>
                 </div>
             </Form>
         </Formik>

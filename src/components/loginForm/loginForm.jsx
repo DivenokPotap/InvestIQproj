@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setAuth,} from "@/redux/Auth/authSlice";
 import css from "./LoginForm.module.css"
 import google from "@/assets/google-symbol 1.svg"
+import base from "@/components/baseStyles/baseStyles.module.css"
 
 
 const validationSchema = Yup.object({
@@ -47,26 +48,26 @@ const LoginForm = ({onSwitchToRegister}) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <Form className={css.Form}>
+                <Form className={base.baseForm}>
                 <div className={css.GoogleSection}>
                     <p className={css.text}>Ви можете авторизуватися за допомогою акаунта Google</p>
                     <button type="button" onClick={handleGoogle} className={css.Gbutton}><img src={google} alt="google" />Google</button>
                         <p className={css.text}>Або увійти за допомогою ел. пошти та праолю після реєстрації</p>
                 </div>
-                <div className={css.Inputs}>
-                <label className={css.label} htmlFor="email">Електронна пошта:
-                <Field className={css.Field} name="email" type="text" placeholder="example@mail.com" />
-                <ErrorMessage className={css.Error} name="email" component="div"/>
+                <div className={base.BaseInputs}>
+                <label className={base.Baselabel} htmlFor="email">Електронна пошта:
+                <Field className={base.BaseField} name="email" type="text" placeholder="example@mail.com" />
+                <ErrorMessage className={base.BaseError} name="email" component="div"/>
                 </label>
                 
-                <label className={css.label} htmlFor="password"> Пароль:
-                <Field className={css.Field} name="password" type="text" />
-                <ErrorMessage className={css.Error} name="password" component="div" />
+                <label className={base.Baselabel} htmlFor="password"> Пароль:
+                <Field className={base.BaseField} name="password" type="password" />
+                <ErrorMessage className={base.BaseError} name="password" component="div" />
                 </label>
                 </div>
-                <div className={css.buttonsSection}>
-                <button className={css.button1} type="submit">УВІЙТИ</button>
-                <button className={css.button2} onClick={onSwitchToRegister} type="button">РЕЄСТРАЦІЯ</button>
+                <div className={base.BasebuttonsSection}>
+                <button className={base.Basebutton1} type="submit">УВІЙТИ</button>
+                <button className={base.Basebutton2} onClick={onSwitchToRegister} type="button">РЕЄСТРАЦІЯ</button>
                 </div>
             </Form>
         </Formik>

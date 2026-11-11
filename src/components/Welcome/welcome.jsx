@@ -17,9 +17,8 @@ const Welcome = () => {
         <p>INVESTIQ</p>
         </div>  
             </header>
-            <section>
-                <img className={css.bgImage} src={bgImage} alt="1" />
-                <div className={css.grey_bg}></div>
+            <section className={css.section}>
+                <div className={css.grey_bg}><img className={css.bgImage} src={bgImage} alt="1" /></div>
         <div className={css.welcomeTXT}>
         <h1 className={css.Invest}>InvestIQ</h1>
         <p className={css.smart}>SMART FINANCE</p> 
