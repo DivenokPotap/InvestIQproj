@@ -3,14 +3,15 @@ import { ErrorMessage,Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useSignUpMutation } from "@/redux/Auth/authApi";
 import { useDispatch } from "react-redux";
-import { setToken } from "@/services/api";
-import { setAuthToken } from "@/redux/Auth/authSlice";
+import { setAuth } from "@/redux/Auth/authSlice";
 import css from "./RegisterForm.module.css"
+import base from "@/components/baseStyles/baseStyles.module.css"
+import clsx from "clsx";
 
 const validationSchema = Yup.object({
-  name: Yup.string().min(2, "Замало").max(70, "Задовго").required('Required'),
-  email: Yup.string().min(2, "Замало").max(70, "Задовго").email('Невірна адреса').required('Required'),
-  password: Yup.string().min(6, 'Потрібно 6 або білше символів').required('Required'),
+  name: Yup.string().min(2, "Замало").max(70, "Задовго").required('Це обовʼязкове поле'),
+  email: Yup.string().min(2, "Замало").max(70, "Задовго").email('Невірна адреса').required('Це обовʼязкове поле'),
+  password: Yup.string().min(6, 'Потрібно 6 або білше символів').required('Це обовʼязкове поле'),
 })
 
 const RegisterForm = ({ onSwitchToLogin }) => {
@@ -20,9 +21,8 @@ const RegisterForm = ({ onSwitchToLogin }) => {
         try {
             const data = await signUp(userData).unwrap();
             console.log(data)
-            setToken(data.token)
 
-            dispatch(setAuthToken(data.token))
+            dispatch(setAuth(data))
             resetForm()
         } catch (error) {
             console.log(error)
@@ -40,25 +40,25 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <Form className={css.Form}>
-                <div className={css.Inputs}>
-                <label className={css.label} htmlFor="name">Ім'я:
-                <Field className={css.Field} name="name" type="text" />
-                <ErrorMessage name="name" component="div"/>
+                <Form className={base.baseForm}>
+                <div className={base.BaseInputs}>
+                <label className={clsx(base.Baselabel, css.label)} htmlFor="name">Ім'я:
+                <Field className={base.BaseField} name="name" type="text" />
+                <ErrorMessage className={base.BaseError} name="name" component="div"/>
                 </label>
-                <label className={css.label} htmlFor="email">Електронна пошта:
-                <Field className={css.Field} name="email" type="text" />
-                <ErrorMessage name="email" component="div"/>
+                <label className={clsx(base.Baselabel, css.label)} htmlFor="email">Електронна пошта:
+                <Field className={base.BaseField} name="email" type="text" />
+                <ErrorMessage className={base.BaseError} name="email" component="div"/>
                 </label>
                 
-                <label className={css.label} htmlFor="password"> Пароль:
-                <Field className={css.Field} name="password" type="text" />
-                <ErrorMessage name="password" component="div" />
+                <label className={clsx(base.Baselabel, css.label)} htmlFor="password"> Пароль:
+                 <Field className={base.BaseField} name="password" type="password" />
+                 <ErrorMessage className={base.BaseError} name="password" component="div" />
                 </label>
                 </div>
-                <div className={css.buttonsSection}>
-                <button className={css.button2} onClick={onSwitchToLogin}>УВІЙТИ</button>
-                <button className={css.button1} type="submit">РЕЄСТРАЦІЯ</button>
+                <div className={clsx(base.BasebuttonsSection, css.buttonSection)}>
+                <button className={base.Basebutton2} onClick={onSwitchToLogin} type="button">УВІЙТИ</button>
+                <button className={base.Basebutton1} type="submit">РЕЄСТРАЦІЯ</button>
                 </div>
             </Form>
         </Formik>

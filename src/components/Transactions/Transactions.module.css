@@ -1,0 +1,97 @@
+.wrap {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.tableBox {
+  flex: 1;
+  max-height: 520px;
+  overflow-y: auto;
+  background: #f5f6fb;
+  border-radius: 20px 20px 0 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background: #f5f6fb;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  padding: 20px 18px;
+}
+
+.table td {
+  height: 44px;
+  padding: 0 18px;
+  font-size: 14px;
+  background: #fff;
+  border-bottom: 1px solid #eef0f6;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.amount {
+  font-weight: 700;
+}
+
+.red {
+  color: #eb5757;
+}
+
+.green {
+  color: #407946;
+}
+
+.deleteBtn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #f5f6fb;
+  color: #52555f;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background: #ffe3d0;
+  color: #ff751d;
+}
+
+.summary {
+  width: 260px;
+  background: #f5f6fb;
+  border-radius: 20px;
+  padding-bottom: 8px;
+}
+
+.summaryTitle {
+  margin: 0;
+  padding: 20px 0 14px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #fff;
+}
+
+.summaryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.summaryList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #fff;
+}
