@@ -17,7 +17,7 @@ const serializeUser = user => ({
   })),
 });
 
-export const serializeError = error => ({
+const serializeError = error => ({
   status: "CUSTOM_ERROR",
   error: error.message || "Unknown error",
 });

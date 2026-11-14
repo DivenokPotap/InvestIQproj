@@ -8,12 +8,6 @@
     box-sizing: border-box;
 }
 
-:root {
-    --color-main: #FF751D;
-    --color-grey: #F5F6FB;
-    --color-text: #52555F;
-}
-
 body {
   margin: 0;
   padding: 0;

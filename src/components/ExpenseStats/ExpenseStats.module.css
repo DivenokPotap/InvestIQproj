@@ -1,0 +1,171 @@
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 30px auto 0;
+}
+
+.block {
+  padding: 30px 30px 36px;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 10px 40px rgba(170, 178, 197, 0.2);
+}
+
+.monthNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.monthTitle,
+.chartTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #52555f;
+  text-align: center;
+}
+
+.chartTitle {
+  margin-bottom: 20px;
+}
+
+.arrow {
+  border: none;
+  background: transparent;
+  color: #ff751d;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-bottom: 22px;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 110px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.catSum {
+  font-size: 11px;
+  color: #7a7d8c;
+}
+
+.catIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.category:hover .catIcon,
+.categoryActive .catIcon {
+  background: #ffe3d0;
+}
+
+.catLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: #52555f;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 18px;
+  height: 320px;
+  padding: 0 10px;
+  background-image: repeating-linear-gradient(
+    to top,
+    transparent 0,
+    transparent 31px,
+    #f1f2f7 31px,
+    #f1f2f7 32px
+  );
+  background-position: 0 -80px;
+}
+
+.barCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 60px;
+  height: 100%;
+}
+
+.barValue {
+  margin-bottom: 4px;
+  font-size: 11px;
+  color: #52555f;
+  white-space: nowrap;
+}
+
+.barTrack {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 240px;
+}
+
+.bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.3s;
+}
+
+.barDark {
+  background: #ff751d;
+}
+
+.barLight {
+  background: #ffd9bf;
+}
+
+.barName {
+  max-width: 100%;
+  margin-top: 8px;
+  overflow: hidden;
+  font-size: 11px;
+  color: #52555f;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 60px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #7a7d8c;
+}
+
+.catIcon img {
+  width: auto;
+  height: 44px;
+  max-width: 56px;
+}

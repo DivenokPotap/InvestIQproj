@@ -3,6 +3,7 @@ import BalanceHint from "../BalanceHint/BalanceHint";
 import Transactions from "../Transactions/Transactions";
 import css from "./Tracker.module.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import ExpenseStats from "../ExpenseStats/ExpenseStats";
 
 const CATEGORIES = {
   expense: [
@@ -12,11 +13,14 @@ const CATEGORIES = {
   income: ["Зарплата", "Додатковий дохід"],
 };
 
-export default function Tracker() {
-  const [balance, setBalance] = useState(0);
+export default function Tracker({
+  balance,
+  setBalance,
+  transactions,
+  setTransactions,
+}) {
   const [balanceInput, setBalanceInput] = useState("");
   const [type, setType] = useState("expense");
-  const [transactions, setTransactions] = useState([]);
 
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -32,7 +36,7 @@ export default function Tracker() {
 
   const changeType = newType => {
     setType(newType);
-    setCategory(""); 
+    setCategory("");
   };
 
   const clearForm = () => {
@@ -54,20 +58,20 @@ export default function Tracker() {
     clearForm();
   };
 
- const askDelete = id => setDeleteId(id);
+  const askDelete = id => setDeleteId(id);
 
-const confirmDelete = () => {
-  const item = transactions.find(tx => tx.id === deleteId);
-  if (item) {
-    setTransactions(prev => prev.filter(tx => tx.id !== deleteId));
-    setBalance(prev =>
-      item.type === "expense" ? prev + item.amount : prev - item.amount,
-    );
-  }
-  setDeleteId(null);
-};
+  const confirmDelete = () => {
+    const item = transactions.find(tx => tx.id === deleteId);
+    if (item) {
+      setTransactions(prev => prev.filter(tx => tx.id !== deleteId));
+      setBalance(prev =>
+        item.type === "expense" ? prev + item.amount : prev - item.amount,
+      );
+    }
+    setDeleteId(null);
+  };
 
-const cancelDelete = () => setDeleteId(null);
+  const cancelDelete = () => setDeleteId(null);
 
   return (
     <div className={css.page}>
@@ -138,15 +142,18 @@ const cancelDelete = () => setDeleteId(null);
             ОЧИСТИТИ
           </button>
         </div>
-<Transactions
-  transactions={transactions}
-  type={type}
-  onDelete={askDelete}
-/>
-{deleteId && (
-  <ConfirmModal onConfirm={confirmDelete} onCancel={cancelDelete} />
-)}
+
+        <Transactions
+          transactions={transactions}
+          type={type}
+          onDelete={askDelete}
+        />
+        {deleteId && (
+          <ConfirmModal onConfirm={confirmDelete} onCancel={cancelDelete} />
+        )}
       </div>
+
+      {type === "expense" && <ExpenseStats transactions={transactions} />}
     </div>
   );
 }
