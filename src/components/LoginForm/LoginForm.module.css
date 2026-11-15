@@ -1,13 +1,7 @@
-.Form{
-    composes: baseForm from '../baseStyles/baseStyles.module.css';
-}
+
 .GoogleSection{
     align-self: center;
     margin-top: 25px;
-}
-.label{
-composes: Baselabel from '../baseStyles/baseStyles.module.css';
-
 }
 
 .text{
@@ -20,21 +14,6 @@ composes: Baselabel from '../baseStyles/baseStyles.module.css';
     margin-bottom: 5px; 
 }
 
-.Inputs{
-   composes: BaseInputs from '../baseStyles/baseStyles.module.css';
-}
-.Field{
-composes: BaseField from '../baseStyles/baseStyles.module.css';
-}
-.buttonsSection{
- composes: BasebuttonsSection from '../baseStyles/baseStyles.module.css';
-}
-.button1 {
-composes: Basebutton1 from '../baseStyles/baseStyles.module.css';
-}
-.button2 {
-   composes: Basebutton2 from '../baseStyles/baseStyles.module.css';
-}
 .Gbutton{
     padding-left: 15px;
     padding-top: 14px;
@@ -56,7 +35,4 @@ composes: Basebutton1 from '../baseStyles/baseStyles.module.css';
     margin-top: -3px;
     width: 18px;
     height: 18px;
-}
-.Error{
-  composes: BaseError from '../baseStyles/baseStyles.module.css';
 }

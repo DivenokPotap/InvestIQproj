@@ -46,16 +46,16 @@ const LoginForm = ({onSwitchToRegister}) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <Form className={css.Form}>
+                <Form className={base.baseForm}>
                 <div className={css.GoogleSection}>
                     <p className={css.text}>Ви можете авторизуватися за допомогою акаунта Google</p>
                     <button type="button" onClick={handleGoogle} className={css.Gbutton}><img src={google} alt="google" />Google</button>
                         <p className={css.text}>Або увійти за допомогою ел. пошти та праолю після реєстрації</p>
                 </div>
-                <div className={css.Inputs}>
-                <label className={css.label} htmlFor="email">Електронна пошта:
-                <Field className={css.Field} name="email" type="text" placeholder="example@mail.com" />
-                <ErrorMessage className={css.Error} name="email" component="div"/>
+                <div className={base.BaseInputs}>
+                <label className={base.Baselabel} htmlFor="email">Електронна пошта:
+                <Field className={base.BaseField} name="email" type="text" placeholder="example@mail.com" />
+                <ErrorMessage className={base.BaseError} name="email" component="div"/>
                 </label>
                 
                 <label className={base.Baselabel} htmlFor="password"> Пароль:
@@ -64,9 +64,9 @@ const LoginForm = ({onSwitchToRegister}) => {
                 <button className={base.visibilityBTN} onClick={() => setShowPassword((prev) => !prev)}><img src={showPassword ? visibilityOff : visibility} alt="visibility"/></button>
                 </label>
                 </div>
-                <div className={css.buttonsSection}>
-                <button className={css.button1} type="submit">УВІЙТИ</button>
-                <button className={css.button2} onClick={onSwitchToRegister} type="button">РЕЄСТРАЦІЯ</button>
+                <div className={base.BasebuttonsSection}>
+                <button className={base.Basebutton1} type="submit">УВІЙТИ</button>
+                <button className={base.Basebutton2} onClick={onSwitchToRegister} type="button">РЕЄСТРАЦІЯ</button>
                 </div>
             </Form>
         </Formik>

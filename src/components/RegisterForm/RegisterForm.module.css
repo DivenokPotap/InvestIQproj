@@ -1,28 +1,7 @@
-.Form{
-    composes: baseForm from '../baseStyles/baseStyles.module.css';
-}
+
 .label{
-composes: Baselabel from '../baseStyles/baseStyles.module.css';
-margin-top: 50px;
-}
-
-
-.Inputs{
-   composes: BaseInputs from '../baseStyles/baseStyles.module.css';
-}
-.Field{
-composes: BaseField from '../baseStyles/baseStyles.module.css';
+margin-top: 60px;
 }
 .buttonsSection{
-    composes: BasebuttonsSection from '../baseStyles/baseStyles.module.css';
     margin-top: 75px;
-}
-.button1 {
-composes: Basebutton1 from '../baseStyles/baseStyles.module.css';
-}
-.button2 {
-   composes: Basebutton2 from '../baseStyles/baseStyles.module.css';
-}
-.Error{
-  composes: BaseError from '../baseStyles/baseStyles.module.css';
 }

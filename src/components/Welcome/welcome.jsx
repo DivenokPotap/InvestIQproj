@@ -1,5 +1,5 @@
 import { useState } from "react"
-import LoginForm from "../loginForm/loginForm"
+import LoginForm from "../LoginForm/LoginForm"
 import RegisterForm from "../RegisterForm/RegisterForm"
 import logo from '@/assets/logo.svg'
 import css from "./welcome.module.css"

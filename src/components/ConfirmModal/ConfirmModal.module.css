@@ -11,8 +11,8 @@
 .modal {
   position: relative;
   width: 100%;
-  max-width: 400px;
-  padding: 52px 30px 48px;
+  max-width: 480px;
+  padding: 60px 30px 50px;
   background: #fff;
   border-radius: 40px;
   text-align: center;
@@ -20,10 +20,8 @@
 
 .close {
   position: absolute;
-  top: 26px;
-  right: 30px;
-  display: flex;
-  padding: 0;
+  top: 24px;
+  right: 28px;
   border: none;
   background: transparent;
   color: #52555f;
@@ -35,27 +33,25 @@
 }
 
 .text {
-  margin: 0 0 32px;
-  font-size: 15px;
+  margin: 0 0 36px;
+  font-size: 18px;
   font-weight: 500;
-  color: #1c1c1c;
+  color: #52555f;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: 20px;
 }
 
 .yes,
 .no {
-  width: 130px;
-  height: 46px;
-  font-family: inherit;
-  font-size: 13px;
+  width: 156px;
+  height: 56px;
+  font-size: 15px;
   font-weight: 700;
-  text-transform: uppercase;
-  border-radius: 23px;
+  border-radius: 28px;
   cursor: pointer;
 }
 
@@ -70,9 +66,9 @@
 }
 
 .no {
-  color: #1c1c1c;
+  color: #52555f;
   background: #fff;
-  border: 2px solid #f1f2f7;
+  border: 2px solid #f5f6fb;
 }
 
 .no:hover {
