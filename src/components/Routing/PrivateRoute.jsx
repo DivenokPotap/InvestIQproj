@@ -3,9 +3,11 @@ import { Navigate } from "react-router";
 
 
 export const PrivateRoute = ({component, navigateTo="/"}) => {
-    const { isLoggedIn } = useAuth()
-    
-    const shouldRedirect = !isLoggedIn;
+    const { isLoggedIn, isRefreshing } = useAuth()
 
-    return shouldRedirect ? <Navigate to={navigateTo}/> : component
+    if (isRefreshing) {
+        return <div>...Loading...</div>
+    }
+
+    return isLoggedIn ? component : <Navigate to={navigateTo}/>
 }
