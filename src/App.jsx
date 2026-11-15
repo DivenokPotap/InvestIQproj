@@ -5,33 +5,36 @@ import { RestrictedRoute } from "./components/Routing/restrictedRoute";
 import { PrivateRoute } from "./components/Routing/privateRoute";
 import Header from "./components/Header/Header";
 import Tracker from "./components/Tracker/Tracker";
-import { useOnAuthChangeQuery } from "./redux/Auth/authApi";
+import { useOnAuthChangeQuery} from "./redux/Auth/authApi";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearAuth, setAuth } from "./redux/Auth/authSlice";
+import { PrivateRoute } from "./components/Routing/PrivateRoute";
 
 function App() {
-  useOnAuthChangeQuery();
+  const dispatch = useDispatch();
+
+  const { data: user } = useOnAuthChangeQuery();
+
+  useEffect(() => {
+    if (user === undefined) return;
+
+    if (user) {
+      dispatch(setAuth(user));
+    } else {
+      dispatch(clearAuth());
+    }
+  }, [user, dispatch]);
+
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <RestrictedRoute component={<Welcome />} navigateTo="/tracker" />
-        }
-      />
-      <Route
-        path="/tracker"
-        element={
-          <PrivateRoute
-            component={
-              <>
-                <Header />
-                <Tracker />
-              </>
-            }
-            navigateTo="/"
-          />
-        }
-      />
-    </Routes>
+    <>
+      <div>
+        <Routes>
+          <Route path="/" element={<RestrictedRoute component={<Welcome />} navigateTo="/transactionBoard" />} />
+          <Route path="/transactionBoard" element={<PrivateRoute component={<Tracker />} navigateTo="/"/>} />
+        </Routes>
+      </div>
+   </>
   );
 }
 

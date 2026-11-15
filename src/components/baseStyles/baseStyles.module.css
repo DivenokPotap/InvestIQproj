@@ -1,7 +1,17 @@
-:root {
-    --color-main: #FF751D;
-    --color-grey: #F5F6FB;
-    --color-text: #52555F;
+.baseForm {
+  position: relative;
+  z-index: 1;
+  margin-top: 130px;
+  margin-left: 100px;
+  width: 436px;
+  height: 535px;
+  background-color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 12px;
+  box-shadow: 0px 10px 60px 0px #AAB2C533;
+  display: flex;
+  flex-direction: column;
 }
 .baseForm{
     position: relative;
@@ -72,8 +82,80 @@ flex-direction: column;
   border-radius: 30px;
   padding-left: 20px;
   border: none;
-  background-color: #F6F7FB;
+  background-color: var(--color-grey);
+  box-sizing: border-box; 
 }
-.BaseRec{
+.BaseField:-webkit-autofill,
+.BaseField:-webkit-autofill:hover, 
+.BaseField:-webkit-autofill:focus, 
+.BaseField:-webkit-autofill:active {
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
 
+  -webkit-text-fill-color: #000000 !important; 
 }
+
+.BaseField[type="password"]:not(:placeholder-shown) {
+  font-size: 25px;
+  letter-spacing: 3px;
+  color: #000000;
+}
+.visibilityBTN{
+  border-radius: 50px;
+  width: 49px;
+  height: 40px;
+  border: none;
+  background-color: var(--color-grey);
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 195px;
+}
+@media (max-width: 1050px) {
+  .BasebuttonsSection {
+  display: flex;
+  gap: 25px;
+  margin-top: 40px;
+  margin-left: 60px;
+}
+
+     .baseForm {
+    max-width: 80%; 
+    margin-left: 50px;
+  }
+}
+@media (max-width: 768px) {
+  .baseForm {
+      margin-left: 20vw; 
+    margin-right: auto; 
+    margin-top: 200px; 
+    max-width: 80%; 
+    height: auto;
+    padding-bottom: 30px;
+    margin-bottom: 200px;
+    box-shadow: 0px 10px 60px 0px #AAB2C533;
+
+  }
+
+  .BasebuttonsSection {
+    margin-left: 0; 
+    justify-content: center;
+  }
+}
+@media (max-width: 320px) {
+  .baseForm {
+    left: 10px; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 200px; 
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 5px 10px 20px 0px #AAB2C566;
+  }
+
+  .BasebuttonsSection {
+    margin-left: 0; 
+    justify-content: center;
+  }
+}
+

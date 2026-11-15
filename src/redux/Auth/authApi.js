@@ -114,22 +114,20 @@ export const authApi = createApi({
       },
     }),
     onAuthChange: builder.query({
-      queryFn: () =>
-        new Promise(resolve => {
-          const unsubscribe = onAuthStateChanged(auth, user => {
-            unsubscribe();
-            resolve({ data: user ? serializeUser(user) : null });
-          });
-        }),
-
-      async onCacheEntryAdded(_, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
-        await cacheDataLoaded;
-        const unsubscribe = onAuthStateChanged(auth, user =>
-          updateCachedData(() => (user ? serializeUser(user) : null)),
-        );
-        await cacheEntryRemoved;
-        unsubscribe();
-      },
+        queryFn: () => ({ data: undefined }), 
+        
+        async onCacheEntryAdded(
+            _, {updateCachedData, cacheEntryRemoved}
+        ) {
+            const unsubscribe = onAuthStateChanged(
+                auth, user => (
+                    updateCachedData(() => (
+                        user ? serializeUser(user) : null
+                    ))
+            ))
+                   await cacheEntryRemoved;
+                   unsubscribe();
+        }
     }),
   }),
 });

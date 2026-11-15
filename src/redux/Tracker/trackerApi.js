@@ -16,12 +16,16 @@ import { serializeError } from "../Auth/authApi";
 export const trackerApi = createApi({
   reducerPath: "trackerApi",
   baseQuery: fakeBaseQuery(),
-  tagTypes: ["Transactions"],
+  tagTypes: ["Transactions" , "Balance"],
   endpoints: builder => ({
     saveTransaction: builder.mutation({
       async queryFn({ transaction, userId }) {
         try {
-          const response = await push(ref(db, `users/${userId}transactions`), {
+          if (!userId) {
+            throw new Error("User is not authorized");
+          }
+
+          const response = await push(ref(db, `users/${userId}/transactions`), {
             ...transaction,
           });
           return { data: response.key };
@@ -34,6 +38,10 @@ export const trackerApi = createApi({
     deleteTransaction: builder.mutation({
       async queryFn({ userId, transactionId }) {
         try {
+                if (!userId || !transactionId) {
+                  throw new Error("Missing userId or transactionId");
+                }
+
           const response = await remove(
             ref(db, `users/${userId}/transactions/${transactionId}`),
           );
@@ -55,8 +63,8 @@ export const trackerApi = createApi({
 
           const transactions = Object.entries(snapshot.val()).map(
             ([id, transaction]) => ({
-              id,
               ...transaction,
+              id,
             }),
           );
 
@@ -67,11 +75,46 @@ export const trackerApi = createApi({
       },
       providesTags: ["Transactions"],
     }),
+    saveBalance: builder.mutation({
+      async queryFn({ userId, balance }) {
+        try {
+          const response = await set(ref(db, `users/${userId}/balance`), {
+            balance
+          });
+          return { data: balance };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+      invalidatesTags: ["Balance"],
+    }),
+    getBalance: builder.query({
+      async queryFn(userId) {
+           try {
+             if (!userId) {
+               throw new Error("User is not authorized");
+             }
+
+             const snapshot = await get(ref(db, `users/${userId}/balance`));
+
+             if (!snapshot.exists()) {
+               return { data: 0 };
+             }
+
+             return { data: snapshot.val().balance };
+           } catch (e) {
+             return { error: serializeError(e) };
+           }
+      },
+      providesTags: ["Balance"],
+    }),
   }),
 });
 
 export const {
   useDeleteTransactionMutation,
   useSaveTransactionMutation,
-  useLazyGetTransactionsQuery,
+  useGetTransactionsQuery,
+  useGetBalanceQuery,
+  useSaveBalanceMutation
 } = trackerApi;
