@@ -17,7 +17,7 @@ const serializeUser = user => ({
   })),
 });
 
-export const serializeError = error => ({
+const serializeError = error => ({
   status: "CUSTOM_ERROR",
   error: error.message || "Unknown error",
 });
@@ -27,6 +27,17 @@ export const authApi = createApi({
   baseQuery: fakeBaseQuery(),
   endpoints: builder => ({
     signUp: builder.mutation({
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // onAuthStateChanged fires before updateProfile, so refresh the cached user (name)
+          dispatch(
+            authApi.util.updateQueryData("onAuthChange", undefined, () => data),
+          );
+        } catch {
+          // error is handled by the form
+        }
+      },
       async queryFn({ name, email, password }) {
         try {
           const result = await createUserWithEmailAndPassword(
@@ -103,20 +114,22 @@ export const authApi = createApi({
       },
     }),
     onAuthChange: builder.query({
-        queryFn: () => ({ data: null }), 
-        
-        async onCacheEntryAdded(
-            _, {updateCachedData, cacheEntryRemoved}
-        ) {
-            const unsubscribe = onAuthStateChanged(
-                auth, user => (
-                    updateCachedData(() => (
-                        user ? serializeUser(user) : null
-                    ))
-            ))
-                   await cacheEntryRemoved;
-                   unsubscribe();
-        }
+      queryFn: () =>
+        new Promise(resolve => {
+          const unsubscribe = onAuthStateChanged(auth, user => {
+            unsubscribe();
+            resolve({ data: user ? serializeUser(user) : null });
+          });
+        }),
+
+      async onCacheEntryAdded(_, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+        await cacheDataLoaded;
+        const unsubscribe = onAuthStateChanged(auth, user =>
+          updateCachedData(() => (user ? serializeUser(user) : null)),
+        );
+        await cacheEntryRemoved;
+        unsubscribe();
+      },
     }),
   }),
 });

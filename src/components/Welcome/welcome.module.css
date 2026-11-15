@@ -1,147 +1,91 @@
-.Logo img { 
-  position: absolute; 
-} 
+.Logo img{
+   position: absolute;
+}
+.Logo p{
+    position: relative;
+    padding-top: 7px;
+    font-size: 16px;
+    font-weight: 800;
+    font-weight: bold;
+    padding-left: 25px;
+}
+.Logo{
+    margin-top: 10px;
+    margin-left: 14px;
+}
+header{
+    height: 56px;
+}
+.container{
+    width: 100%;
+    max-width: 1280px;
+    height: 850px;
+}
+.Invest{
+    font-weight: 900;
+    font-size: 102px;
+}
+.smart{
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 125px;
+}
+.welcomeTXT{
+    margin-top: 150px;
+    line-height: 5px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-left: 200px;
+}
+.grey_bg{
+    top: 56px;
+    background-color: var(--color-grey);
+    width: 100vw;
+    height: 553px;
+    position: absolute;
+    z-index: -1;              
+    pointer-events: none;
+    border-bottom-left-radius: 150px;
+}
 
-.Logo p { 
-  position: relative; 
-  padding-top: 7px; 
-  font-size: 16px; 
-  font-weight: 800; 
-  padding-left: 25px; 
-} 
+.bgImage{
+   position: absolute;
+   z-index: 0; 
+   top: 60px;
+   left: 5px;
+   width: 100vw;   
+}
 
-.Logo { 
-  margin-top: 10px; 
-  margin-left: 14px; 
-} 
-
-header { 
-  height: 56px; 
-} 
-
-.container { 
-  width: 100%; 
-  max-width: 1280px; 
-  height: 850px; 
-} 
-.section{
+.Rec65{
+    position: absolute;
+    margin-top: 10px;
+}
+.Rec66{
+    margin-left: 90px;
+}
+.Recs{
+    margin-top: 160px;
+    margin-left: 65px;
     display: flex;
 }
-
-.Invest { 
-  font-weight: 900; 
-  font-size: 102px; 
-} 
-
-.smart { 
-  font-weight: 700; 
-  font-size: 16px; 
-  margin-left: 85px; 
-} 
-
-.welcomeTXT { 
-  margin-top: 350px; 
-  line-height: 0.5px; 
-  display: flex; 
-  flex-direction: column; 
-  margin-left: 14vw; 
-} 
-
-.grey_bg { 
-  top: 56px; 
-  background-color: var(--color-grey); 
-  width: 100vw; 
-  height: 553px; 
-  position: absolute; 
-  z-index: -1; 
-  pointer-events: none; 
-  border-bottom-left-radius: 150px; 
-  overflow: hidden; 
-} 
-
-.bgImage { 
-  position: absolute; 
-  z-index: 0; 
-  top: 20px; 
-  left: 5px; 
-  width: 99.70vw; 
-} 
-
-.Rec65 { 
-  position: absolute; 
-  margin-top: 10px; 
-} 
-
-.Rec66 { 
-  margin-left: 90px; 
-} 
-
-.Recs { 
-  margin-top: 85px; 
-  margin-left: 50px; 
-  display: flex; 
-} 
-
-.Shadows { 
-  margin-top: 5px; 
-  display: flex; 
-} 
-
-.Shadow65 { 
-  margin-top: 30px; 
-  margin-left: 45px; 
-  background-color: var(--color-grey); 
-  width: 91px; 
-  height: 18px; 
-  border-radius: 50%; 
-} 
-
-.Shadow66 { 
-  margin-top: 10px; 
-  margin-left: 30px; 
-  background-color: var(--color-grey); 
-  width: 91px; 
-  height: 18px; 
-  border-radius: 50%; 
-} 
-
-@media (max-width: 1050px) {
-  .welcomeTXT { 
-  margin-left: 10vw; 
-} 
+.Shadows{
+    margin-top: 20px;
+    display: flex;
 }
-
-@media (max-width: 768px) { 
-  body { 
-    font-size: 16px; 
-    height: 1024px;
-  } 
-  
-  .container { 
-    max-width: 100%; 
-    height: auto; 
-  } 
-  
-  .bgImage { 
-    margin-top: 100px; 
-    margin-left: 100px; 
-    transform: scale(2)
-  } 
-  
-  .welcomeTXT { 
-    position: absolute;
-    margin: 0 auto;
-    top:85px;
-      margin-left: 20vw; 
-  } 
-  
-  .Recs { 
-    margin-top: 550px; 
-    margin-left: -50px;
-  } 
-  
-  .Shadows { 
-    margin-top: 10px; 
-    margin-left: -100px;
-  } 
+.Shadow65{
+    margin-top: 30px;
+    margin-left: 60px;
+    background-color: var(--color-grey);
+    width: 91px;
+    height: 18px;
+    border-radius: 50%;   
+}
+.Shadow66{
+    margin-top: 10px;
+    margin-left: 30px;
+    background-color: var(--color-grey);
+    width: 91px;
+    height: 18px;
+    border-radius: 50%;   
 }
