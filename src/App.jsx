@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { clearAuth, setAuth } from "./redux/Auth/authSlice";
 import { PrivateRoute } from "./components/Routing/PrivateRoute";
+import { Layout } from "./components/Routing/Layout";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,8 +29,10 @@ function App() {
     <>
       <div>
         <Routes>
-          <Route path="/" element={<RestrictedRoute component={<Welcome />} navigateTo="/transactionBoard" />} />
-          <Route path="/transactionBoard" element={<PrivateRoute component={<Tracker />} navigateTo="/"/>} />
+          <Route path="/" element={<Layout />}>
+          <Route index element={<RestrictedRoute component={<Welcome />} navigateTo="/transactionBoard" />} />
+          <Route path="/transactionBoard" element={<PrivateRoute component={<Tracker />} navigateTo="/" />} />
+          </Route>
         </Routes>
       </div>
    </>
