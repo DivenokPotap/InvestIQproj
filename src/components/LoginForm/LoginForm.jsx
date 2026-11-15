@@ -1,12 +1,12 @@
-import React from "react";
+import React, { use, useState } from "react";
 import { ErrorMessage,Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useSignInMutation, useSignInWithGoogleMutation } from "@/redux/Auth/authApi";
-import { useDispatch } from "react-redux";
-import { setAuth,} from "@/redux/Auth/authSlice";
 import css from "./LoginForm.module.css"
 import google from "@/assets/google-symbol 1.svg"
 import base from "@/components/baseStyles/baseStyles.module.css"
+import visibility from "@/assets/visibility.svg"
+import visibilityOff from "@/assets/visibility_off.svg"
 
 
 const validationSchema = Yup.object({
@@ -17,12 +17,11 @@ const validationSchema = Yup.object({
 const LoginForm = ({onSwitchToRegister}) => {
     const [signIn, { }] = useSignInMutation();
     const [signInWithGoogle, { }] = useSignInWithGoogleMutation();
-    const dispatch = useDispatch()
+    const[showPassword, setShowPassword] = useState(false);
     const handleSubmit = async (userData, { resetForm }) => {
         try {
-            const data = await signIn(userData).unwrap();
+            await signIn(userData).unwrap();
 
-            dispatch(setAuth(data))
             resetForm()
         } catch (error) {
             console.log(error)
@@ -31,13 +30,12 @@ const LoginForm = ({onSwitchToRegister}) => {
     }
       const handleGoogle = async () => {
             try {
-                const data = await signInWithGoogle().unwrap();
-
-                dispatch(setAuth(data))
+                await signInWithGoogle().unwrap();
             } catch (error) {
                 console.log(error)
             }
-        }
+      }
+    
     return(
     <div>
         <Formik
@@ -61,8 +59,9 @@ const LoginForm = ({onSwitchToRegister}) => {
                 </label>
                 
                 <label className={base.Baselabel} htmlFor="password"> Пароль:
-                <Field className={base.BaseField} name="password" type="password" />
+                <Field className={base.BaseField} name="password" type={showPassword ? 'text' : 'password'} />
                 <ErrorMessage className={base.BaseError} name="password" component="div" />
+                <button className={base.visibilityBTN} onClick={() => setShowPassword((prev) => !prev)}><img src={showPassword ? visibilityOff : visibility} alt="visibility"/></button>
                 </label>
                 </div>
                 <div className={base.BasebuttonsSection}>

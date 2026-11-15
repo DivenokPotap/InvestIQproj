@@ -103,7 +103,7 @@ export const authApi = createApi({
       },
     }),
     onAuthChange: builder.query({
-        queryFn: () => ({ data: null }), 
+        queryFn: () => ({ data: undefined }), 
         
         async onCacheEntryAdded(
             _, {updateCachedData, cacheEntryRemoved}

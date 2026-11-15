@@ -2,8 +2,6 @@ import React from "react";
 import { ErrorMessage,Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useSignUpMutation } from "@/redux/Auth/authApi";
-import { useDispatch } from "react-redux";
-import { setAuth } from "@/redux/Auth/authSlice";
 import css from "./RegisterForm.module.css"
 import base from "@/components/baseStyles/baseStyles.module.css"
 import clsx from "clsx";
@@ -16,13 +14,10 @@ const validationSchema = Yup.object({
 
 const RegisterForm = ({ onSwitchToLogin }) => {
     const [signUp, { isLoading, isError }] = useSignUpMutation();
-    const dispatch = useDispatch()
     const handleSubmit = async (userData, { resetForm }) => {
         try {
-            const data = await signUp(userData).unwrap();
-            console.log(data)
+            await signUp(userData).unwrap();
 
-            dispatch(setAuth(data))
             resetForm()
         } catch (error) {
             console.log(error)

@@ -3,7 +3,6 @@ import LoginForm from "../LoginForm/LoginForm"
 import RegisterForm from "../RegisterForm/RegisterForm"
 import logo from '@/assets/logo.svg'
 import css from "./welcome.module.css"
-import bgImage from "@/assets/Group 87.svg";
 import Rec65 from "@/assets/Rectangle 65.svg";
 import Rec66 from "@/assets/Rectangle 66.svg";
 
@@ -18,7 +17,7 @@ const Welcome = () => {
         </div>  
             </header>
             <section className={css.section}>
-                <div className={css.grey_bg}><img className={css.bgImage} src={bgImage} alt="1" /></div>
+                <div className={css.grey_bg}><div className={css.bgImage}></div> <div/></div>
         <div className={css.welcomeTXT}>
         <h1 className={css.Invest}>InvestIQ</h1>
         <p className={css.smart}>SMART FINANCE</p> 
