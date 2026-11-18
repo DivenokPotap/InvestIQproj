@@ -115,7 +115,7 @@
 }
 @media (max-width: 768px) {
   .baseForm {
-      margin-left: 20vw; 
+      margin-left: 175px; 
     margin-right: auto; 
     margin-top: 200px; 
     max-width: 80%; 
@@ -131,12 +131,49 @@
     justify-content: center;
   }
 }
+@media (max-width: 500px) {
+  .baseForm {
+    width: 350px;
+    left: 50px;
+    margin-left: 0;
+    margin-right: 0; 
+    margin-top: 150px; 
+    max-width: 95%; 
+    height: auto;
+    padding-bottom: 30px;
+    margin-bottom: 200px;
+    box-shadow: 0px 10px 60px 0px #AAB2C533;
+
+  }
+
+  .BasebuttonsSection {
+    margin-left: 0; 
+    justify-content: center;
+  }
+}
+@media (max-width: 375px) {
+  .baseForm {
+    left: 15px; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 150px; 
+    width: 340px;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 5px 10px 20px 0px #AAB2C566;
+  }
+
+  .BasebuttonsSection {
+    margin-left: 0; 
+    justify-content: center;
+  }
+}
 @media (max-width: 320px) {
   .baseForm {
     left: 10px; 
     margin-left: auto; 
     margin-right: auto;
-    margin-top: 200px; 
+    margin-top: 150px; 
     width: 300px;
     max-width: 100%;
     height: auto;
@@ -148,4 +185,3 @@
     justify-content: center;
   }
 }
-

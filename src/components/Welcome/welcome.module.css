@@ -151,7 +151,7 @@ header {
   } 
 }
 
-@media (max-width: 320px) { 
+@media (max-width: 425px) { 
     .container { 
     max-width: 100%; 
     height: auto; 
@@ -163,7 +163,7 @@ header {
     position: absolute;
     margin: 0 auto;
     top:85px;
-    margin-left: 10vw; 
+    margin-left: 30px; 
   } 
   .smart { 
   font-weight: 600; 
