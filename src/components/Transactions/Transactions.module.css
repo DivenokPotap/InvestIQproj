@@ -11,10 +11,10 @@
   min-width: 0;
   height: 520px;
   overflow-y: scroll;
-  background: #f5f6fb;
+  background:  var(--color-grey);
   border-radius: 20px 20px 0 0;
   scrollbar-width: thin;
-  scrollbar-color: #ff751d #f5f6fb;
+  scrollbar-color: var(--color-main)  var(--color-grey);
 }
 
 .tableBox::-webkit-scrollbar {
@@ -23,11 +23,11 @@
 }
 
 .tableBox::-webkit-scrollbar-track {
-  background: #f5f6fb;
+  background:  var(--color-grey);
 }
 
 .tableBox::-webkit-scrollbar-thumb {
-  background: #ff751d;
+  background: var(--color-main);
   border-radius: 3px;
   min-height: 40px;
 }
@@ -40,7 +40,7 @@
 .table th {
   position: sticky;
   top: 0;
-  background: #f5f6fb;
+  background:  var(--color-grey);
   font-size: 14px;
   font-weight: 700;
   text-align: left;
@@ -76,20 +76,20 @@
   height: 36px;
   border: none;
   border-radius: 50%;
-  background: #f5f6fb;
-  color: #52555f;
+  background:  var(--color-grey);
+  color: var(--color-text);
   cursor: pointer;
 }
 
 .deleteBtn:hover {
   background: #ffe3d0;
-  color: #ff751d;
+  color: var(--color-main);
 }
 
 .summary {
   width: 260px;
   flex-shrink: 0;
-  background: #f5f6fb;
+  background:  var(--color-grey);
   border-radius: 20px;
   padding-bottom: 8px;
 }

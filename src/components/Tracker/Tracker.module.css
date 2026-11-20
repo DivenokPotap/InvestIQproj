@@ -1,9 +1,9 @@
 .page {
   min-height: 100vh;
   padding: 30px 40px 60px;
-  background: #fafbfd;
+  background:  var(--color-grey);
   font-family: "Roboto", Arial, sans-serif;
-  color: #52555f;
+  color:  var(--color-text);
 }
 
 .header {
@@ -66,13 +66,13 @@
   font-weight: 700;
   border: none;
   border-radius: 28px 28px 0 0;
-  background: #f5f6fb;
-  color: #52555f;
+  background:  var(--color-grey);
+  color:  var(--color-text);
   cursor: pointer;
 }
 
 .tabActive {
-  color: #ff751d;
+  color: var(--color-main);
 }
 
 .form {
@@ -91,7 +91,7 @@
 .fields {
   display: flex;
   flex: 1;
-  border: 2px solid #f5f6fb;
+  border: 2px solid  var(--color-grey);
   border-radius: 30px;
   overflow: hidden;
 }
@@ -115,14 +115,14 @@
 .select {
   flex: 2;
   min-width: 0;
-  border-left: 2px solid #f5f6fb;
-  color: #7a7d8c;
+  border-left: 2px solid  var(--color-grey);
+  color:  var(--color-text);
 }
 
 .sum {
   width: 130px;
   text-align: center;
-  border-left: 2px solid #f5f6fb;
+  border-left: 2px solid  var(--color-grey);
 }
 
 .btns {
@@ -142,18 +142,18 @@
 
 .primaryBtn {
   color: #fff;
-  background: #ff751d;
+  background: var(--color-main);
   border: none;
 }
 
 .primaryBtn:hover {
-  background: #e65f08;
+  background: var(--color-main);
 }
 
 .secondaryBtn {
-  color: #52555f;
+  color: var(--color-text);
   background: #fff;
-  border: 2px solid #f5f6fb;
+  border: 2px solid  var(--color-grey);
 }
 
 @media (max-width: 1024px) {
@@ -270,7 +270,7 @@
 
   .tabs {
   position: fixed;
-  left: 220px;
+  left: 50%;
   bottom: 12px;
   z-index: 20;
   display: flex;
@@ -281,7 +281,7 @@
   transform: translateX(-50%);
   border-radius: 20px;
   overflow: hidden;
-  background: #f5f6fb;
+  background:  var(--color-grey);
   box-shadow: 0 4px 14px rgba(170, 178, 197, 0.35);
 }
 
@@ -295,12 +295,12 @@
   text-align: center;
   border-radius: 0;
   color: #000;
-  background: #f5f6fb;
+  background:  var(--color-grey);
 }
 
 .tabActive {
   color: #fff;
-  background: #ff751d;
+  background: var(--color-main);
 }
   .form {
     flex-direction: column;
@@ -332,7 +332,7 @@
   .select,
   .sum {
     border-left: none;
-    border-top: 2px solid #f5f6fb;
+    border-top: 2px solid var(--color-grey);
   }
 
   .sum {

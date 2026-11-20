@@ -1,53 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BalanceHint from "../BalanceHint/BalanceHint";
 import Transactions from "../Transactions/Transactions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-
 import css from "./Tracker.module.css";
-
-const CATEGORIES = {
-  expense: [
-    "Транспорт",
-    "Продукти",
-    "Здоров'я",
-    "Алкоголь",
-    "Розваги",
-    "Все для дому",
-    "Техніка",
-    "Комуналка",
-    "Спорт",
-    "Освіта",
-    "Інше",
-  ],
-  income: ["Зарплата", "Додатковий дохід"],
-};
-
 import { useDeleteTransactionMutation, useGetBalanceQuery, useGetTransactionsQuery, useSaveBalanceMutation, useSaveTransactionMutation } from "@/redux/Tracker/trackerApi";
 import { useAuth } from "@/redux/Auth/useAuh";
-import { CATEGORIES} from "@/constants";
+import { CATEGORIES } from "@/constants";
 
 
-
-const loadData = (key, fallback) => {
-  try {
-    const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : fallback;
-  } catch {
-    return fallback;
-  }
-};
-
-export default function Tracker() {
-
-  const [balance, setBalance] = useState(() => loadData("balance", 0));
-  const [balanceInput, setBalanceInput] = useState("");
-  const [type, setType] = useState("expense");
-  const [transactions, setTransactions] = useState(() =>
-    loadData("transactions", []),
-  );
-
-  
-  const { user } = useAuth()
+export default function Tracker() { const { user } = useAuth()
 
 
   const [saveBalance] = useSaveBalanceMutation();
@@ -71,14 +32,6 @@ export default function Tracker() {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [deleteId, setDeleteId] = useState(null);
-
-  useEffect(() => {
-    localStorage.setItem("balance", JSON.stringify(balance));
-  }, [balance]);
-
-  useEffect(() => {
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-  }, [transactions]);
 
   const today = new Date().toLocaleDateString("uk-UA");
 
@@ -121,17 +74,6 @@ export default function Tracker() {
 
   const askDelete = id => setDeleteId(id);
 
-
-  const confirmDelete = () => {
-    const item = transactions.find(tx => tx.id === deleteId);
-    if (item) {
-      setTransactions(prev => prev.filter(tx => tx.id !== deleteId));
-      setBalance(prev =>
-        item.type === "expense" ? prev + item.amount : prev - item.amount,
-      );
-    }
-    setDeleteId(null);
-  };
 
 const confirmDelete = async () => {
   const item = transactions.find(tx => tx.id === deleteId);
