@@ -1,14 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BalanceHint from "../BalanceHint/BalanceHint";
 import Transactions from "../Transactions/Transactions";
-import css from "./Tracker.module.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+
+import css from "./Tracker.module.css";
+
+const CATEGORIES = {
+  expense: [
+    "Транспорт",
+    "Продукти",
+    "Здоров'я",
+    "Алкоголь",
+    "Розваги",
+    "Все для дому",
+    "Техніка",
+    "Комуналка",
+    "Спорт",
+    "Освіта",
+    "Інше",
+  ],
+  income: ["Зарплата", "Додатковий дохід"],
+};
+
 import { useDeleteTransactionMutation, useGetBalanceQuery, useGetTransactionsQuery, useSaveBalanceMutation, useSaveTransactionMutation } from "@/redux/Tracker/trackerApi";
 import { useAuth } from "@/redux/Auth/useAuh";
 import { CATEGORIES} from "@/constants";
 
 
+
+const loadData = (key, fallback) => {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 export default function Tracker() {
+
+  const [balance, setBalance] = useState(() => loadData("balance", 0));
+  const [balanceInput, setBalanceInput] = useState("");
+  const [type, setType] = useState("expense");
+  const [transactions, setTransactions] = useState(() =>
+    loadData("transactions", []),
+  );
+
   
   const { user } = useAuth()
 
@@ -28,11 +65,20 @@ export default function Tracker() {
 
   const [saveTransaction] = useSaveTransactionMutation();
 
+
   const [deleteTransaction] = useDeleteTransactionMutation();
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [deleteId, setDeleteId] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("balance", JSON.stringify(balance));
+  }, [balance]);
+
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
 
   const today = new Date().toLocaleDateString("uk-UA");
 
@@ -73,7 +119,19 @@ export default function Tracker() {
 
   };
 
- const askDelete = id => setDeleteId(id);
+  const askDelete = id => setDeleteId(id);
+
+
+  const confirmDelete = () => {
+    const item = transactions.find(tx => tx.id === deleteId);
+    if (item) {
+      setTransactions(prev => prev.filter(tx => tx.id !== deleteId));
+      setBalance(prev =>
+        item.type === "expense" ? prev + item.amount : prev - item.amount,
+      );
+    }
+    setDeleteId(null);
+  };
 
 const confirmDelete = async () => {
   const item = transactions.find(tx => tx.id === deleteId);
@@ -93,7 +151,8 @@ const confirmDelete = async () => {
   
 };
 
-const cancelDelete = () => setDeleteId(null);
+
+  const cancelDelete = () => setDeleteId(null);
 
   return (
     <div className={css.page}>
@@ -157,21 +216,25 @@ const cancelDelete = () => setDeleteId(null);
               onChange={e => setAmount(e.target.value)}
             />
           </div>
-          <button className={css.primaryBtn} onClick={addTransaction}>
-            ВВЕСТИ
-          </button>
-          <button className={css.secondaryBtn} onClick={clearForm}>
-            ОЧИСТИТИ
-          </button>
+          <div className={css.btns}>
+            <button className={css.primaryBtn} onClick={addTransaction}>
+              ВВЕСТИ
+            </button>
+            <button className={css.secondaryBtn} onClick={clearForm}>
+              ОЧИСТИТИ
+            </button>
+          </div>
         </div>
-<Transactions
-  transactions={transactions}
-  type={type}
-  onDelete={askDelete}
-/>
-{deleteId && (
-  <ConfirmModal onConfirm={confirmDelete} onCancel={cancelDelete} />
-)}
+
+        <Transactions
+          transactions={transactions}
+          type={type}
+          onDelete={askDelete}
+        />
+
+        {deleteId && (
+          <ConfirmModal onConfirm={confirmDelete} onCancel={cancelDelete} />
+        )}
       </div>
     </div>
   );
