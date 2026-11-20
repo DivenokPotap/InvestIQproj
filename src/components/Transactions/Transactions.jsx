@@ -1,6 +1,6 @@
 import css from "./Transactions.module.css";
 
-const ROWS_COUNT = 9;
+const ROWS_COUNT = 14;
 
 const MONTHS = [
   "СІЧЕНЬ", "ЛЮТИЙ", "БЕРЕЗЕНЬ", "КВІТЕНЬ", "ТРАВЕНЬ", "ЧЕРВЕНЬ",
@@ -10,6 +10,7 @@ const MONTHS = [
 export default function Transactions({ transactions, type, onDelete }) {
   const list = transactions.filter(item => item.type === type);
   const emptyCount = Math.max(ROWS_COUNT - list.length, 0);
+
   const byMonth = {};
   list.forEach(item => {
     const [, month, year] = item.date.split(".");
