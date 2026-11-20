@@ -1,0 +1,208 @@
+.wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.tableBox {
+  flex: 1;
+  min-width: 0;
+  height: 520px;
+  overflow-y: scroll;
+  background:  var(--color-grey);
+  border-radius: 20px 20px 0 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-main)  var(--color-grey);
+}
+
+.tableBox::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.tableBox::-webkit-scrollbar-track {
+  background:  var(--color-grey);
+}
+
+.tableBox::-webkit-scrollbar-thumb {
+  background: var(--color-main);
+  border-radius: 3px;
+  min-height: 40px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background:  var(--color-grey);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  padding: 20px 18px;
+}
+
+.table td {
+  height: 44px;
+  padding: 0 18px;
+  font-size: 14px;
+  background: #fff;
+  border-bottom: 1px solid #eef0f6;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.amount {
+  font-weight: 700;
+}
+
+.red {
+  color: #eb5757;
+}
+
+.green {
+  color: #407946;
+}
+
+.deleteBtn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background:  var(--color-grey);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background: #ffe3d0;
+  color: var(--color-main);
+}
+
+.summary {
+  width: 260px;
+  flex-shrink: 0;
+  background:  var(--color-grey);
+  border-radius: 20px;
+  padding-bottom: 8px;
+}
+
+.summaryTitle {
+  margin: 0;
+  padding: 20px 0 14px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #fff;
+}
+
+.summaryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.summaryList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #fff;
+}
+
+@media (max-width: 1024px) {
+  .wrap {
+    gap: 16px;
+  }
+
+  .tableBox {
+    height: 420px;
+  }
+
+  .table th {
+    padding: 16px 10px;
+    font-size: 12px;
+  }
+
+  .table td {
+    height: 40px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .deleteBtn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .summary {
+    width: 170px;
+  }
+
+  .summaryTitle {
+    padding: 16px 0 12px;
+    font-size: 12px;
+  }
+
+  .summaryList li {
+    padding: 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    gap: 8px;
+  }
+
+  .tableBox {
+    height: 340px;
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 340px;
+  }
+
+  .table th {
+    padding: 12px 6px;
+    font-size: 10px;
+  }
+
+  .table td {
+    height: 34px;
+    padding: 0 6px;
+    font-size: 10px;
+  }
+
+  .deleteBtn {
+    width: 24px;
+    height: 24px;
+  }
+
+  .deleteBtn svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .summary {
+    width: 110px;
+  }
+
+  .summaryTitle {
+    padding: 12px 0 10px;
+    font-size: 10px;
+  }
+
+  .summaryList li {
+    padding: 8px 6px;
+    font-size: 9px;
+  }
+}
