@@ -6,7 +6,7 @@ import css from "./Tracker.module.css";
 import { useDeleteTransactionMutation, useGetBalanceQuery, useGetTransactionsQuery, useSaveBalanceMutation, useSaveTransactionMutation } from "@/redux/Tracker/trackerApi";
 import { useAuth } from "@/redux/Auth/useAuh";
 import { CATEGORIES } from "@/constants";
-import Reports from "../Reports/Reports";
+import Reports from "@/components/Reports/Reports";
 
 
 export default function Tracker() { const { user } = useAuth()
@@ -100,6 +100,7 @@ const confirmDelete = async () => {
 
   return (
     <div className={css.page}>
+        <title>Balance</title>
       {showReports ? (
         <Reports
           balance={savedBalance}

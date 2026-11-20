@@ -1,5 +1,6 @@
 import { useState } from "react";
 import css from "./ExpenseStats.module.css";
+import { EMPTY, TITLES } from "@/constants";
 
 import products from "../../assets/Group_62.svg";
 import alcohol from "../../assets/cocktail_1.svg";
@@ -15,13 +16,13 @@ import other from "../../assets/ufo_1.svg";
 import salarySvg from "../../assets/salary.svg";
 import extraSvg from "../../assets/extra.svg";
 
+
 const img = src => <img src={src} alt="" />;
 
 const salaryIcon = <img src={salarySvg} width={44} height={44} alt="" />;
 const extraIcon = <img src={extraSvg} width={44} height={44} alt="" />;
 
-
-const CATEGORY_LIST = {
+export const CATEGORY_LIST = {
   expense: [
     { name: "Продукти", label: "ПРОДУКТИ", icon: img(products) },
     { name: "Алкоголь", label: "АЛКОГОЛЬ", icon: img(alcohol) },
@@ -35,16 +36,10 @@ const CATEGORY_LIST = {
     { name: "Освіта", label: "НАВЧАННЯ", icon: img(education) },
     { name: "Інше", label: "ІНШЕ", icon: img(other) },
   ],
-  income: [
+ income: [
     { name: "Зарплата", label: "ЗАРПЛАТА", icon: salaryIcon },
     { name: "Додатковий дохід", label: "ДОД. ПРИБУТОК", icon: extraIcon },
   ],
-};
-
-const TITLES = { expense: "ВИТРАТИ", income: "ДОХІД" };
-const EMPTY = {
-  expense: "Немає витрат у цій категорії за обраний місяць",
-  income: "Немає доходів у цій категорії за обраний місяць",
 };
 
 const MAX_BARS = 10;

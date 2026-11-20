@@ -20,3 +20,10 @@ export const MONTHS = [
   "ЛИСТОПАД",
   "ГРУДЕНЬ",
 ];
+
+
+export const TITLES = { expense: "ВИТРАТИ", income: "ДОХІД" };
+export const EMPTY = {
+  expense: "Немає витрат у цій категорії за обраний місяць",
+  income: "Немає доходів у цій категорії за обраний місяць",
+};

@@ -2,6 +2,8 @@ import { useState } from "react";
 import css from "./Reports.module.css";
 import ExpenseStats from "../ExpenseStats/ExpenseStats";
 import { MONTHS } from "@/constants";
+import { useGetBalanceQuery, useGetTransactionsQuery } from "@/redux/Tracker/trackerApi";
+import { useAuth } from "@/redux/Auth/useAuh";
 
 const fmt = value =>
   value.toLocaleString("uk-UA", {
@@ -9,12 +11,23 @@ const fmt = value =>
     maximumFractionDigits: 2,
   });
 
-export default function Reports({ balance, transactions, onBack }) {
-  const now = new Date();
-  const [month, setMonth] = useState(now.getMonth()); 
-  const [year, setYear] = useState(now.getFullYear());
-  const [type, setType] = useState("expense"); 
+export default function Reports({ onBack }) {
+  const { user } = useAuth();
+  const userId = user?.uid; 
+  const { data: transactions = [], isLoading: transactionsLoading } =
+    useGetTransactionsQuery(userId, { skip: !userId });
 
+  const { data: balance = 0, isLoading: balanceLoading } =
+    useGetBalanceQuery(userId, { skip: !userId });
+
+  const now = new Date();
+  const [month, setMonth] = useState(now.getMonth());
+  const [year, setYear] = useState(now.getFullYear());
+  const [type, setType] = useState("expense");
+
+  if (transactionsLoading || balanceLoading) {
+    return <p>Завантаження звітів...</p>;
+  }
   const shiftMonth = step => {
     const next = month + step;
     if (next < 0) {
