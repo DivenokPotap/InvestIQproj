@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BalanceHint from "../BalanceHint/BalanceHint";
 import Transactions from "../Transactions/Transactions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+
 import css from "./Tracker.module.css";
 
 const CATEGORIES = {
@@ -21,6 +22,12 @@ const CATEGORIES = {
   income: ["Зарплата", "Додатковий дохід"],
 };
 
+import { useDeleteTransactionMutation, useGetBalanceQuery, useGetTransactionsQuery, useSaveBalanceMutation, useSaveTransactionMutation } from "@/redux/Tracker/trackerApi";
+import { useAuth } from "@/redux/Auth/useAuh";
+import { CATEGORIES} from "@/constants";
+
+
+
 const loadData = (key, fallback) => {
   try {
     const saved = localStorage.getItem(key);
@@ -31,6 +38,7 @@ const loadData = (key, fallback) => {
 };
 
 export default function Tracker() {
+
   const [balance, setBalance] = useState(() => loadData("balance", 0));
   const [balanceInput, setBalanceInput] = useState("");
   const [type, setType] = useState("expense");
@@ -38,6 +46,27 @@ export default function Tracker() {
     loadData("transactions", []),
   );
 
+  
+  const { user } = useAuth()
+
+
+  const [saveBalance] = useSaveBalanceMutation();
+    const { data: savedBalance = 0 } = useGetBalanceQuery(user?.uid, {
+  skip: !user?.uid,
+});
+  const [balanceInput, setBalanceInput] = useState("");
+  const [type, setType] = useState("expense");
+  const {
+    data: transactions = [],
+    isLoading: transactionsLoading,
+  } = useGetTransactionsQuery(user?.uid, {
+    skip: !user?.uid,
+  });
+
+  const [saveTransaction] = useSaveTransactionMutation();
+
+
+  const [deleteTransaction] = useDeleteTransactionMutation();
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
@@ -53,9 +82,15 @@ export default function Tracker() {
 
   const today = new Date().toLocaleDateString("uk-UA");
 
-  const confirmBalance = () => {
-    const value = Number(balanceInput);
-    if (value > 0) setBalance(value);
+  const confirmBalance = async () => {
+    try {
+       const value = Number(balanceInput);
+      if (value > 0) await saveBalance({ userId: user?.uid, balance: value }).unwrap();
+        setBalanceInput("");
+    } catch (error) {
+      console.log(error)
+    }
+   
   };
 
   const changeType = newType => {
@@ -69,20 +104,23 @@ export default function Tracker() {
     setAmount("");
   };
 
-  const addTransaction = () => {
+  const addTransaction = async () => {
     const sum = Number(amount);
     if (!description || !category || sum <= 0) return;
-    if (type === "expense" && sum > balance) return;
-
-    setTransactions(prev => [
-      ...prev,
-      { id: Date.now(), type, description, category, amount: sum, date: today },
-    ]);
-    setBalance(prev => (type === "expense" ? prev - sum : prev + sum));
+    if (type === "expense" && sum > savedBalance) return;
+    try {
+      const value = type === "expense" ? savedBalance - sum : savedBalance + sum
+      await saveTransaction({ transaction: { id: Date.now(), type, description, category, amount: sum, date: today }, userId: user?.uid}).unwrap();
+      await saveBalance({userId: user?.uid, balance: value}).unwrap();
     clearForm();
+    } catch (error) {
+      console.log(error)
+    }
+
   };
 
   const askDelete = id => setDeleteId(id);
+
 
   const confirmDelete = () => {
     const item = transactions.find(tx => tx.id === deleteId);
@@ -95,6 +133,25 @@ export default function Tracker() {
     setDeleteId(null);
   };
 
+const confirmDelete = async () => {
+  const item = transactions.find(tx => tx.id === deleteId);
+
+    if (!item || !user?.uid) return;
+  try {
+    if (item) {
+      const value = item.type === "expense" ? savedBalance + item.amount : savedBalance - item.amount
+           await deleteTransaction({userId: user?.uid, transactionId: item.id}).unwrap();
+      await saveBalance({ userId: user?.uid, balance: value}
+    ).unwrap() 
+    }
+    setDeleteId(null);
+  } catch (error) {
+       console.log(error)
+  }
+  
+};
+
+
   const cancelDelete = () => setDeleteId(null);
 
   return (
@@ -104,14 +161,14 @@ export default function Tracker() {
         <input
           className={css.balanceInput}
           type="number"
-          placeholder={`${balance.toFixed(2)} UAH`}
+          placeholder={`${savedBalance.toFixed(2)} UAH`}
           value={balanceInput}
           onChange={e => setBalanceInput(e.target.value)}
         />
         <button className={css.confirmBtn} onClick={confirmBalance}>
           ПІДТВЕРДИТИ
         </button>
-        <BalanceHint balance={balance} />
+        <BalanceHint balance={savedBalance} />
       </div>
 
       <div className={css.card}>
