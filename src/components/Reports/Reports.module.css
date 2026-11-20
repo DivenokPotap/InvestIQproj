@@ -1,0 +1,152 @@
+.reports {
+  width: 100%;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.back {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #52555f;
+  cursor: pointer;
+}
+
+.backArrow {
+  color: #ff751d;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.balanceBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.label {
+  font-size: 16px;
+}
+
+.balance {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #52555f;
+  background: #fff;
+  border: 2px solid #fff;
+  border-radius: 28px;
+  box-shadow: 0 4px 20px rgba(170, 178, 197, 0.2);
+}
+
+.period {
+  justify-self: end;
+  text-align: center;
+}
+
+.periodLabel {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #7a7d8c;
+}
+
+.periodNav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.periodValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: #52555f;
+}
+
+.arrow {
+  border: none;
+  background: transparent;
+  color: #ff751d;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 18px 30px;
+  font-size: 15px;
+  color: #52555f;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 10px 40px rgba(170, 178, 197, 0.2);
+}
+
+.summaryItem b {
+  margin-left: 6px;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: #e4e7f0;
+}
+
+.expense {
+  color: #e53935;
+}
+
+.income {
+  color: #2e7d32;
+}
+
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .back,
+  .period {
+    justify-self: center;
+  }
+
+  .balance {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  .summary {
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 20px;
+    border-radius: 28px;
+  }
+
+  .divider {
+    display: none;
+  }
+}

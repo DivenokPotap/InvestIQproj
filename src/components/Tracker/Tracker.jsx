@@ -6,6 +6,7 @@ import css from "./Tracker.module.css";
 import { useDeleteTransactionMutation, useGetBalanceQuery, useGetTransactionsQuery, useSaveBalanceMutation, useSaveTransactionMutation } from "@/redux/Tracker/trackerApi";
 import { useAuth } from "@/redux/Auth/useAuh";
 import { CATEGORIES } from "@/constants";
+import Reports from "../Reports/Reports";
 
 
 export default function Tracker() { const { user } = useAuth()
@@ -32,6 +33,7 @@ export default function Tracker() { const { user } = useAuth()
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [deleteId, setDeleteId] = useState(null);
+  const [showReports, setShowReports] = useState(false);
 
   const today = new Date().toLocaleDateString("uk-UA");
 
@@ -98,6 +100,14 @@ const confirmDelete = async () => {
 
   return (
     <div className={css.page}>
+      {showReports ? (
+        <Reports
+          balance={savedBalance}
+          transactions={transactions}
+          onBack={() => setShowReports(false)}
+        />
+      ) : (
+        <>
       <div className={css.header}>
         <span className={css.label}>Баланс:</span>
         <input
@@ -111,6 +121,25 @@ const confirmDelete = async () => {
           ПІДТВЕРДИТИ
         </button>
         <BalanceHint balance={savedBalance} />
+        <button
+          type="button"
+          className={css.reportsLink}
+          onClick={() => setShowReports(true)}
+        >
+          Перейти до розрахунків
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ff751d"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M5 20V10M12 20V4M19 20v-7" />
+          </svg>
+        </button>
       </div>
 
       <div className={css.card}>
@@ -178,6 +207,8 @@ const confirmDelete = async () => {
           <ConfirmModal onConfirm={confirmDelete} onCancel={cancelDelete} />
         )}
       </div>
+        </>
+      )}
     </div>
   );
 }
