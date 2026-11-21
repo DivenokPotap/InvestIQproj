@@ -412,7 +412,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .page {
     padding: 20px 12px 70px;
     overflow-x: hidden;
@@ -476,7 +476,7 @@
 
   .tabs {
     position: fixed;
-    left: 220px;
+    left: 50%;
     bottom: 12px;
     z-index: 20;
     width: calc(100% - 24px);
