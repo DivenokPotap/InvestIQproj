@@ -1,11 +1,7 @@
+import { MONTHS } from "@/constants";
 import css from "./Transactions.module.css";
 
 const ROWS_COUNT = 14;
-
-const MONTHS = [
-  "СІЧЕНЬ", "ЛЮТИЙ", "БЕРЕЗЕНЬ", "КВІТЕНЬ", "ТРАВЕНЬ", "ЧЕРВЕНЬ",
-  "ЛИПЕНЬ", "СЕРПЕНЬ", "ВЕРЕСЕНЬ", "ЖОВТЕНЬ", "ЛИСТОПАД", "ГРУДЕНЬ",
-];
 
 export default function Transactions({ transactions, type, onDelete }) {
   const list = transactions.filter(item => item.type === type);
@@ -82,7 +78,7 @@ export default function Transactions({ transactions, type, onDelete }) {
         <ul className={css.summaryList}>
           {summary.map(([key, sum]) => (
             <li key={key}>
-              <span>{MONTHS[Number(key.split("-")[1]) - 1]}</span>
+              <span>{MONTHS [Number(key.split("-")[1]) - 1]}</span>
               <span>{formatSum(sum)}</span>
             </li>
           ))}

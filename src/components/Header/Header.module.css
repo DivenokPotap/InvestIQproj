@@ -1,0 +1,113 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  padding: 0 32px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(170, 178, 197, 0.15);
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 31px;
+}
+
+.logoImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.logoText {
+  position: relative;
+  padding: 7px 0 0 25px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #000;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f5f6fb;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2128;
+  user-select: none;
+}
+
+.userName {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #52555f;
+}
+
+.divider {
+  width: 1px;
+  height: 34px;
+  background: #e8eaf2;
+}
+
+.logoutBtn {
+  padding: 0 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #52555f;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  color: #ff751d;
+}
+
+.logoutBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .userName {
+    display: none;
+  }
+}
+@media (max-width: 320px) {
+    .logoutBtn {
+    font-size: 0;
+  }
+ .logoutBtn::before {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url("@/assets/logout 1.svg") no-repeat center;
+    background-size: contain;
+  }
+  .divider{
+    display: none;
+  }
+}

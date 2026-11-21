@@ -6,7 +6,7 @@ export const RestrictedRoute = ({component, navigateTo="/"}) => {
     const { isLoggedIn, isRefreshing } = useAuth()
 
     if (isRefreshing) {
-        <div>...Loading...</div>
+    return   <div>...Loading...</div>
     }
 
     return isLoggedIn ? <Navigate to={navigateTo}/> : component

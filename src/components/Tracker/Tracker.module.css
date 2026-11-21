@@ -11,7 +11,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 30px 40px 60px;
-  background: #fafbfd;
+  background:  var(--color-grey);
   font-family: "Roboto", Arial, sans-serif;
   color: var(--text);
 }
@@ -100,6 +100,26 @@
 .balanceInput:focus {
   border-color: var(--orange);
   box-shadow: 0 0 0 3px rgba(255, 117, 29, 0.15);
+}
+
+
+
+.reportsLink {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.reportsLink:hover {
+  color: var(--color-main);
 }
 
 .confirmBtn {
@@ -316,6 +336,12 @@
 }
 
 @media (max-width: 1024px) {
+
+  .reportsLink {
+    position: static;
+    font-size: 12px;
+  }
+
   .page {
     padding: 24px 20px 50px;
   }
@@ -432,6 +458,21 @@
     padding: 24px 12px;
     border-radius: 24px;
   }
+
+  .reportsLink {
+  position: absolute;
+  right: 24%;
+  top: 800px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--color-text);
+  cursor: pointer;
+}
 
   .tabs {
     position: fixed;

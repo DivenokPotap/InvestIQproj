@@ -9,7 +9,7 @@
   min-width: 0;
   height: 520px;
   overflow-y: scroll;
-  background: #f5f6fb;
+  background:  var(--color-grey);
   border-radius: 20px 20px 0 0;
   scrollbar-color: #ff751d #f5f6fb;
 }
@@ -20,7 +20,7 @@
 }
 
 .tableBox::-webkit-scrollbar-track {
-  background: #f5f6fb;
+  background:  var(--color-grey);
 }
 
 .tableBox::-webkit-scrollbar-thumb {

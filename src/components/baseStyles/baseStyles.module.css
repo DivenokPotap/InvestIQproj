@@ -1,0 +1,246 @@
+.baseForm {
+    position: relative;
+    z-index: 1;
+
+ width: 436px;
+min-width: 0;
+max-width: 100%;
+
+    height: 535px;
+
+    margin-top: 120px;
+    margin-left: 25%;
+    margin-right: auto;
+
+    padding: 0 20px 30px;
+    box-sizing: border-box;
+
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+
+    font-size: 12px;
+    box-shadow: 0px 10px 60px 0px #AAB2C533;
+
+    display: flex;
+    flex-direction: column;
+
+    flex-shrink: 0;
+}
+
+
+.Baselabel {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.BasebuttonsSection {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+  margin-left: 66px;
+}
+
+.Basebutton1 {
+  font-size: 12px;
+  width: 125px;
+  height: 44px;
+  border-radius: 16px;
+  background-color: var(--color-main);
+  color: white;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0px 4px 6px #FF6B0859; 
+}
+
+.Basebutton2 {
+  font-size: 12px;
+  width: 125px;
+  height: 44px;
+  border-radius: 16px;
+  background-color: var(--color-grey);
+  color: var(--color-text);
+  font-weight: 700;
+  border: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.BaseError {
+  margin-top: 80px;
+  position: absolute;
+  color: #EB5757;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.BaseInputs {
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.BaseField {
+  width: 265px;
+  height: 52px;
+  border-radius: 30px;
+  padding-left: 20px;
+  border: none;
+  background-color: var(--color-grey);
+  box-sizing: border-box; 
+}
+.BaseField:-webkit-autofill,
+.BaseField:-webkit-autofill:hover, 
+.BaseField:-webkit-autofill:focus, 
+.BaseField:-webkit-autofill:active {
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+
+  -webkit-text-fill-color: #000000 !important; 
+}
+
+.BaseField[type="password"]:not(:placeholder-shown) {
+  font-size: 25px;
+  letter-spacing: 3px;
+  color: #000000;
+}
+.BaseField:hover{
+    cursor: pointer;
+}
+.visibilityBTN:hover{
+   cursor: pointer;
+}
+.visibilityBTN{
+  border-radius: 50px;
+  width: 49px;
+  height: 40px;
+  border: none;
+  background-color: var(--color-grey);
+  position: absolute;
+  margin-top: 35px;
+  margin-left: 215px;
+}
+@media (max-width: 1190px) {
+    .baseForm {
+      right: 20%;
+    }
+}
+@media (max-width: 900px) {
+    .baseForm {
+      right: 20%;
+      width: 385px;
+    }
+    .BasebuttonsSection {
+  margin-left: 35px;
+}
+
+}
+
+@media (max-width: 768px) {
+    .baseForm {
+        width: 436px;
+        max-width: calc(100% - 40px);
+
+        margin: 35% 45% 200px;
+
+        right: auto;
+        left: auto;
+
+        box-sizing: border-box;
+    }
+
+    .BasebuttonsSection {
+        margin-left: 0;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 650px) {
+    .baseForm {
+      right: 10%;
+        width: 400px;
+        max-width: calc(100% - 30px);
+        margin-top: 150px;
+    }
+}
+
+@media (max-width: 600px) {
+    .baseForm {
+        width: 320px;
+        max-width: calc(100% - 10px);
+        left: 3%;
+    }
+
+    .BasebuttonsSection {
+        margin-left: 0;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 550px) {
+    .baseForm {
+        width: 310px;
+        max-width: calc(100% - 20px);
+        margin-top: 150px;
+        margin-left: 30%;
+    }
+
+    .Basebutton1,
+    .Basebutton2 {
+        width: 115px;
+    }
+            .BaseField{
+      width: 253px;
+    }
+    .visibilityBTN{
+        margin-left: 204px;
+    }
+}
+@media (max-width: 450px) {
+    .baseForm {
+        width: 310px;
+        max-width: calc(100% - 20px);
+        margin-top: 150px;
+        margin-left: 20%;
+    }
+
+    .Basebutton1,
+    .Basebutton2 {
+        width: 115px;
+    }
+}
+
+@media (max-width: 400px) {
+    .baseForm {
+        width: 320px;
+        max-width: calc(100% - 20px);
+        margin-left: 5%;
+    }
+
+    .BasebuttonsSection {
+        gap: 10px;
+    }
+}
+@media (max-width: 330px) {
+    .baseForm {
+        width: 310px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .BasebuttonsSection {
+        gap: 10px;
+    }
+    .BaseInputs{
+      right: 20%;
+    }
+    .BaseField{
+      width: 253px;
+    }
+    .visibilityBTN{
+        margin-left: 204px;
+    }
+}

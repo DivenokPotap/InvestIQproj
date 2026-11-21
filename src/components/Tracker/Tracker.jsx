@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BalanceHint from "../BalanceHint/BalanceHint";
 import Transactions from "../Transactions/Transactions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import css from "./Tracker.module.css";
+import { useDeleteTransactionMutation, useGetBalanceQuery, useGetTransactionsQuery, useSaveBalanceMutation, useSaveTransactionMutation } from "@/redux/Tracker/trackerApi";
+import { useAuth } from "@/redux/Auth/useAuh";
+import { CATEGORIES } from "@/constants";
+import Reports from "@/components/Reports/Reports";
 
 const CATEGORIES = {
   expense: [
@@ -74,14 +78,46 @@ export default function Tracker() {
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
+export default function Tracker() { const { user } = useAuth()
+
+
+  const [saveBalance] = useSaveBalanceMutation();
+    const { data: savedBalance = 0 } = useGetBalanceQuery(user?.uid, {
+  skip: !user?.uid,
+});
+  const [balanceInput, setBalanceInput] = useState("");
+  const [type, setType] = useState("expense");
+  const {
+    data: transactions = [],
+    isLoading: transactionsLoading,
+  } = useGetTransactionsQuery(user?.uid, {
+    skip: !user?.uid,
+  });
+
+  const [saveTransaction] = useSaveTransactionMutation();
+
+
+  const [deleteTransaction] = useDeleteTransactionMutation();
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState("");
+  const [deleteId, setDeleteId] = useState(null);
+  const [showReports, setShowReports] = useState(false);
+
   const changeBalanceInput = e => {
     if (e.target.value === "" || Number(e.target.value) >= 0)
       setBalanceInput(e.target.value);
   };
 
-  const confirmBalance = () => {
-    setBalance(Number(balanceInput));
-    setBalanceInput("");
+  const confirmBalance = async () => {
+    try {
+       const value = Number(balanceInput);
+      if (value > 0) await saveBalance({ userId: user?.uid, balance: value }).unwrap();
+        setBalanceInput("");
+    } catch (error) {
+      console.log(error)
+    }
+   
   };
 
   const changeType = newType => {
@@ -92,6 +128,20 @@ export default function Tracker() {
   const addTransaction = () => {
     const amount = Number(form.amount);
     if (!form.description || !form.category || amount <= 0) return;
+  const addTransaction = async () => {
+    const sum = Number(amount);
+    if (!description || !category || sum <= 0) return;
+    if (type === "expense" && sum > savedBalance) return;
+    try {
+      const value = type === "expense" ? savedBalance - sum : savedBalance + sum
+      await saveTransaction({ transaction: { id: Date.now(), type, description, category, amount: sum, date: today }, userId: user?.uid}).unwrap();
+      await saveBalance({userId: user?.uid, balance: value}).unwrap();
+    clearForm();
+    } catch (error) {
+      console.log(error)
+    }
+
+  };
 
     if (!isIncome && amount > balance) {
       setNotice(`Недостатньо коштів. Ваш баланс: ${balance.toFixed(2)} UAH`);
@@ -105,19 +155,39 @@ export default function Tracker() {
     setForm(EMPTY_FORM);
   };
 
-  const confirmDelete = () => {
-    const item = transactions.find(tx => tx.id === deleteId);
+
+const confirmDelete = async () => {
+  const item = transactions.find(tx => tx.id === deleteId);
+
+    if (!item || !user?.uid) return;
+  try {
     if (item) {
-      setTransactions(prev => prev.filter(tx => tx.id !== deleteId));
-      setBalance(prev => prev - signed(item));
+      const value = item.type === "expense" ? savedBalance + item.amount : savedBalance - item.amount
+           await deleteTransaction({userId: user?.uid, transactionId: item.id}).unwrap();
+      await saveBalance({ userId: user?.uid, balance: value}
+    ).unwrap() 
     }
     setDeleteId(null);
-  };
+  } catch (error) {
+       console.log(error)
+  }
+  
+};
+
 
   return (
     <div className={css.page}>
       {notice && <div className={css.notify} role="alert">{notice}</div>}
 
+        <title>Balance</title>
+      {showReports ? (
+        <Reports
+          balance={savedBalance}
+          transactions={transactions}
+          onBack={() => setShowReports(false)}
+        />
+      ) : (
+        <>
       <div className={css.header}>
         <span className={css.label}>Баланс:</span>
         <input
@@ -130,6 +200,19 @@ export default function Tracker() {
           onChange={changeBalanceInput}
           onKeyDown={blockKeys}
           onWheel={e => e.target.blur()}
+          placeholder={`${savedBalance.toFixed(2)} UAH`}
+          value={balanceInput}
+         onChange={e => {
+    const value = e.target.value;
+    if (Number(value) >= 0 || value === "") {
+      setBalanceInput(value);
+    }
+  }}
+  onKeyDown={e => {
+    if (e.key === "-" || e.key === "e") {
+      e.preventDefault();
+    }
+  }}
         />
         <button
           className={css.confirmBtn}
@@ -138,7 +221,26 @@ export default function Tracker() {
         >
           ПІДТВЕРДИТИ
         </button>
-        <BalanceHint balance={balance} />
+        <BalanceHint balance={savedBalance} userId={user?.uid}/>
+        <button
+          type="button"
+          className={css.reportsLink}
+          onClick={() => setShowReports(true)}
+        >
+          Перейти до розрахунків
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ff751d"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M5 20V10M12 20V4M19 20v-7" />
+          </svg>
+        </button>
       </div>
 
       <div className={css.card}>
@@ -236,6 +338,8 @@ export default function Tracker() {
           />
         )}
       </div>
+        </>
+      )}
     </div>
   );
 }
