@@ -1,20 +1,7 @@
-import { useEffect, useState } from "react";
 import "./BalanceHint.css";
 
 export default function BalanceHint({ balance }) {
-  const [visible, setVisible] = useState(
-    () => !localStorage.getItem("hintSeen") && balance === 0,
-  );
-
-  useEffect(() => {
-    localStorage.setItem("hintSeen", "true");
-  }, []);
-
-  useEffect(() => {
-    if (balance > 0) setVisible(false);
-  }, [balance]);
-
-  if (!visible) return null;
+  if (balance > 0) return null;
 
   return (
     <div className="balance-hint">
