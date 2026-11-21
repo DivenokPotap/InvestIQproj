@@ -116,12 +116,22 @@ const confirmDelete = async () => {
           type="number"
           placeholder={`${savedBalance.toFixed(2)} UAH`}
           value={balanceInput}
-          onChange={e => setBalanceInput(e.target.value)}
+         onChange={e => {
+    const value = e.target.value;
+    if (Number(value) >= 0 || value === "") {
+      setBalanceInput(value);
+    }
+  }}
+  onKeyDown={e => {
+    if (e.key === "-" || e.key === "e") {
+      e.preventDefault();
+    }
+  }}
         />
         <button className={css.confirmBtn} onClick={confirmBalance}>
           ПІДТВЕРДИТИ
         </button>
-        <BalanceHint balance={savedBalance} />
+        <BalanceHint balance={savedBalance} userId={user?.uid}/>
         <button
           type="button"
           className={css.reportsLink}

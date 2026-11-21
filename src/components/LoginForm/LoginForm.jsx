@@ -48,9 +48,9 @@ const LoginForm = ({onSwitchToRegister}) => {
             >
                 <Form className={base.baseForm}>
                 <div className={css.GoogleSection}>
-                    <p className={css.text}>Ви можете авторизуватися за допомогою акаунта Google</p>
+                    <p className={css.Gtext}>Ви можете авторизуватися за допомогою акаунта Google</p>
                     <button type="button" onClick={handleGoogle} className={css.Gbutton}><img src={google} alt="google" />Google</button>
-                        <p className={css.text}>Або увійти за допомогою ел. пошти та праолю після реєстрації</p>
+                        <p className={css.text}>Або увійти за допомогою ел. пошти та паролю після реєстрації</p>
                 </div>
                 <div className={base.BaseInputs}>
                 <label className={base.Baselabel} htmlFor="email">Електронна пошта:

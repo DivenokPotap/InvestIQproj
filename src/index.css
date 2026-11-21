@@ -46,3 +46,6 @@ img {
   height: auto;
 }
 
+button:hover{
+   cursor: pointer;
+}

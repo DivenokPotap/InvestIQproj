@@ -95,3 +95,19 @@
     display: none;
   }
 }
+@media (max-width: 320px) {
+    .logoutBtn {
+    font-size: 0;
+  }
+ .logoutBtn::before {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url("@/assets/logout 1.svg") no-repeat center;
+    background-size: contain;
+  }
+  .divider{
+    display: none;
+  }
+}

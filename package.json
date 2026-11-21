@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/Ivan-Malakhovskyi/react_vite_template",
+  "homepage": "https://github.com/DivenokPotap/InvestIQproj",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

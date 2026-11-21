@@ -16,7 +16,7 @@ import { serializeError } from "../Auth/authApi";
 export const trackerApi = createApi({
   reducerPath: "trackerApi",
   baseQuery: fakeBaseQuery(),
-  tagTypes: ["Transactions" , "Balance"],
+  tagTypes: ["Transactions", "Balance", "Hint"],
   endpoints: builder => ({
     saveTransaction: builder.mutation({
       async queryFn({ transaction, userId }) {
@@ -38,9 +38,9 @@ export const trackerApi = createApi({
     deleteTransaction: builder.mutation({
       async queryFn({ userId, transactionId }) {
         try {
-                if (!userId || !transactionId) {
-                  throw new Error("Missing userId or transactionId");
-                }
+          if (!userId || !transactionId) {
+            throw new Error("Missing userId or transactionId");
+          }
 
           const response = await remove(
             ref(db, `users/${userId}/transactions/${transactionId}`),
@@ -79,7 +79,7 @@ export const trackerApi = createApi({
       async queryFn({ userId, balance }) {
         try {
           const response = await set(ref(db, `users/${userId}/balance`), {
-            balance
+            balance,
           });
           return { data: balance };
         } catch (e) {
@@ -90,23 +90,58 @@ export const trackerApi = createApi({
     }),
     getBalance: builder.query({
       async queryFn(userId) {
-           try {
-             if (!userId) {
-               throw new Error("User is not authorized");
-             }
+        try {
+          if (!userId) {
+            throw new Error("User is not authorized");
+          }
 
-             const snapshot = await get(ref(db, `users/${userId}/balance`));
+          const snapshot = await get(ref(db, `users/${userId}/balance`));
 
-             if (!snapshot.exists()) {
-               return { data: 0 };
-             }
+          if (!snapshot.exists()) {
+            return { data: 0 };
+          }
 
-             return { data: snapshot.val().balance };
-           } catch (e) {
-             return { error: serializeError(e) };
-           }
+          return { data: snapshot.val().balance };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
       },
       providesTags: ["Balance"],
+    }),
+    getHintSeen: builder.query({
+      async queryFn(userId) {
+        try {
+          if (!userId) {
+            throw new Error("User is not authorized");
+          }
+
+          const snapshot = await get(ref(db, `users/${userId}/hintSeen`));
+
+          return {
+            data: snapshot.exists() ? snapshot.val() : false,
+          };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+      providesTags: ["Hint"],
+    }),
+
+    saveHintSeen: builder.mutation({
+      async queryFn({ userId }) {
+        try {
+          if (!userId) {
+            throw new Error("User is not authorized");
+          }
+
+          await set(ref(db, `users/${userId}/hintSeen`), true);
+
+          return { data: true };
+        } catch (e) {
+          return { error: serializeError(e) };
+        }
+      },
+      invalidatesTags: ["Hint"],
     }),
   }),
 });
@@ -116,5 +151,7 @@ export const {
   useSaveTransactionMutation,
   useGetTransactionsQuery,
   useGetBalanceQuery,
-  useSaveBalanceMutation
+  useSaveBalanceMutation,
+  useGetHintSeenQuery,
+  useSaveHintSeenMutation,
 } = trackerApi;
